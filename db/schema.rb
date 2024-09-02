@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_150347) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_153855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,7 +25,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_150347) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "origin_address"
+    t.float "origin_longitude"
+    t.float "origin_latitude"
     t.index ["user_id"], name: "index_cats_on_user_id"
+  end
+
+  create_table "sightings", force: :cascade do |t|
+    t.float "longitude"
+    t.float "latitude"
+    t.datetime "last_seen_at"
+    t.text "description"
+    t.string "address"
+    t.bigint "user_id", null: false
+    t.bigint "cat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cat_id"], name: "index_sightings_on_cat_id"
+    t.index ["user_id"], name: "index_sightings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +58,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_150347) do
   end
 
   add_foreign_key "cats", "users"
+  add_foreign_key "sightings", "cats"
+  add_foreign_key "sightings", "users"
 end
