@@ -1,0 +1,21 @@
+<h1>Sighting Details</h1>
+
+<div class="sighting-details">
+  <p><strong>Address:</strong> <%= @sighting.address %></p>
+  <p><strong>Last Seen At:</strong> <%= @sighting.last_seen_at.strftime("%B %d, %Y %H:%M") %></p>
+  <p><strong>Description:</strong> <%= @sighting.description %></p>
+
+  <h2>Location</h2>
+  <ul>
+    <li><strong>Longitude:</strong> <%= @sighting.longitude %></li>
+    <li><strong>Latitude:</strong> <%= @sighting.latitude %></li>
+  </ul>
+
+  <h2>Associated Information</h2>
+  <p><strong>Reported by User:</strong> <%= @sighting.user.email %></p>
+  <p><strong>Cat:</strong> <%= @sighting.cat.name %></p>
+
+  <hr>
+  <p><em>Created at:</em> <%= @sighting.created_at.strftime("%B %d, %Y %H:%M") %></p>
+  <p><em>Last updated at:</em> <%= @sighting.updated_at.strftime("%B %d, %Y %H:%M") %></p>
+</div>
