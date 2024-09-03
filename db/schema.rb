@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_132145) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_143008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,12 +23,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_132145) do
     t.string "fur"
     t.boolean "found", default: false
     t.bigint "user_id", null: false
+    t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "origin_address"
     t.float "origin_longitude"
     t.float "origin_latitude"
-    t.string "city"
     t.index ["user_id"], name: "index_cats_on_user_id"
   end
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_132145) do
     t.bigint "cat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "city"
     t.index ["cat_id"], name: "index_sightings_on_cat_id"
     t.index ["user_id"], name: "index_sightings_on_user_id"
   end
