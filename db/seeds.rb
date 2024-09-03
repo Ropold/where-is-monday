@@ -2,10 +2,14 @@
 Sighting.destroy_all
 User.destroy_all
 Cat.destroy_all
+
 puts "Creating Users:"
 user1 = User.create(email: "john@wayne.com", password: "1234567898")
 user2 = User.create(email: "john@wick.com", password: "1234567898")
+
 puts "Creating Cats:"
+
+
 cat1 = Cat.create(
   name: "Luna",
   description: "A playful kitten who loves to chase shadows.",
@@ -20,6 +24,7 @@ cat1 = Cat.create(
   origin_longitude: 6.9576,
   origin_latitude: 50.9376
 )
+
 cat2 = Cat.create(
   name: "Simba",
   description: "A courageous and adventurous cat.",
@@ -34,6 +39,7 @@ cat2 = Cat.create(
   origin_longitude: 6.9457,
   origin_latitude: 50.9372
 )
+
 cat3 = Cat.create(
   name: "Bella",
   description: "A gentle cat with a soft purr.",
@@ -48,6 +54,7 @@ cat3 = Cat.create(
   origin_longitude: 6.9448,
   origin_latitude: 50.9428
 )
+
 cat4 = Cat.create(
   name: "Leo",
   description: "An energetic cat who enjoys climbing trees.",
@@ -62,6 +69,7 @@ cat4 = Cat.create(
   origin_longitude: 6.9420,
   origin_latitude: 50.9378
 )
+
 cat5 = Cat.create(
   name: "Max",
   description: "A calm and friendly cat who loves the outdoors.",
@@ -76,7 +84,10 @@ cat5 = Cat.create(
   origin_longitude: 7.0086,
   origin_latitude: 51.0322
 )
+
+
 puts "Creating Sightings in 4x Cologne and 1x Leverkusen:"
+
 Sighting.create(
   longitude: 6.9603,
   latitude: 50.9375,
@@ -87,6 +98,7 @@ Sighting.create(
   user_id: user1.id,
   cat_id: cat1.id
 )
+
 Sighting.create(
   longitude: 6.9794,
   latitude: 50.9431,
@@ -97,6 +109,7 @@ Sighting.create(
   user_id: user2.id,
   cat_id: cat2.id
 )
+
 Sighting.create(
   longitude: 6.9645,
   latitude: 50.9364,
@@ -107,6 +120,7 @@ Sighting.create(
   user_id: user1.id,
   cat_id: cat3.id
 )
+
 Sighting.create(
   longitude: 6.9789,
   latitude: 50.9578,
@@ -117,6 +131,7 @@ Sighting.create(
   user_id: user2.id,
   cat_id: cat4.id
 )
+
 Sighting.create(
   longitude: 7.0192,
   latitude: 51.0322,
