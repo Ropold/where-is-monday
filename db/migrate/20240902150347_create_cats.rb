@@ -9,6 +9,7 @@ class CreateCats < ActiveRecord::Migration[7.1]
       t.string :fur
       t.boolean :found, default: false
       t.references :user, null: false, foreign_key: true
+      t.string :city
 
       t.timestamps
     end
