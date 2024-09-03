@@ -64,3 +64,9 @@
 .back-link:hover {
   text-decoration: underline;
 }
+
+.cat-picture img {
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: cover;
+}

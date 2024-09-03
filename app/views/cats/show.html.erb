@@ -1,17 +1,36 @@
-<h1>Cat Details</h1>
-
-<p><strong>Name:</strong> <%= @cat.name %></p>
-<p><strong>Description:</strong> <%= @cat.description %></p>
-<p><strong>Race:</strong> <%= @cat.race %></p>
-<p><strong>Eye Color:</strong> <%= @cat.eye_color %></p>
-<p><strong>Color:</strong> <%= @cat.color %></p>
-<p><strong>Fur:</strong> <%= @cat.fur %></p>
-<p><strong>Found:</strong> <%= @cat.found ? 'Yes' : 'No' %></p>
-<p><strong>User ID:</strong> <%= @cat.user_id %></p>
-<p><strong>Origin Address:</strong> <%= @cat.origin_address %></p>
-<p><strong>Origin Longitude:</strong> <%= @cat.origin_longitude %></p>
-<p><strong>Origin Latitude:</strong> <%= @cat.origin_latitude %></p>
-
-<%= link_to 'Edit', edit_cat_path(@cat) %> |
-<%= link_to 'Back to List', cats_path %> |
-<%= link_to 'Delete', @cat, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="container pt-4">
+  <div class="card">
+    <div class="card-header bg-info text-white">
+      <h1 class="card-title mb-0">Cat Details</h1>
+    </div>
+    <div class="card-body d-flex">
+      <div class="flex-grow-1">
+        <p><strong>Name:</strong> <%= @cat.name %></p>
+        <p><strong>Description:</strong> <%= @cat.description %></p>
+        <p><strong>Race:</strong> <%= @cat.race %></p>
+        <p><strong>Eye Color:</strong> <%= @cat.eye_color %></p>
+        <p><strong>Color:</strong> <%= @cat.color %></p>
+        <p><strong>Fur:</strong> <%= @cat.fur %></p>
+        <p><strong>Found:</strong> <%= @cat.found ? 'Yes' : 'No' %></p>
+        <p><strong>City:</strong> <%= @cat.city %></p>
+        <p><strong>Origin Address:</strong> <%= @cat.origin_address %></p>
+        <p><strong>Origin Longitude:</strong> <%= @cat.origin_longitude %></p>
+        <p><strong>Origin Latitude:</strong> <%= @cat.origin_latitude %></p>
+      </div>
+      <div class="cat-picture ml-4">
+        <% if @cat %>
+          <%= image_tag href="https://th.bing.com/th/id/OIP.kds7FMl11rCBDNqZuvnmGgHaE8?w=238&h=180&c=7&r=0&o=5&dpr=2&pid=1.7", class: "img-fluid rounded", alt: "Picture of #{@cat.name}" %>
+        <% else %>
+          <p>No picture available</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-footer bg-lightyellow">
+      <div class="d-flex justify-content-between">
+        <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
+        <%= link_to 'Back to List', cats_path, class: 'btn btn-secondary' %>
+        <%= link_to 'Delete', @cat, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
