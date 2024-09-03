@@ -1,52 +1,58 @@
-<!-- app/views/cats/_form.html.erb -->
+<h1 style="text-align: center; color: gray;">New Cat Report</h1>
 
-<%= form_with(model: @cat, local: true) do |form| %>
-  <% if @cat.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cat.errors.count, "error") %>Easy:</h2>
+<div class="cat-form-container">
+  <%= form_with(model: @cat, local: true, html: { multipart: true }) do |form| %>
+    <% if @cat.errors.any? %>
+      <div id="error_explanation" style="background-color: yellow; border: 1px solid gold; padding: 10px; margin-bottom: 20px;">
+        <h2><%= pluralize(@cat.errors.count, "error") %>Saved Report</h2>
+        <ul>
+          <% @cat.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% @cat.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="cat-form">
+      <%= form.label :name, "Cats Name", class: "form-label" %>
+      <%= form.text_field :name, class: "form-input" %>
+
+      <%= form.label :description, "Description", class: "form-label" %>
+      <%= form.text_area :description, class: "form-textarea" %>
+
+      <%= form.label :race, "Race", class: "form-label" %>
+      <%= form.text_field :race, class: "form-input" %>
+
+      <%= form.label :eye_color, "Eye Color", class: "form-label" %>
+      <%= form.text_field :eye_color, class: "form-input" %>
+
+      <%= form.label :color, "Color", class: "form-label" %>
+      <%= form.text_field :color, class: "form-input" %>
+
+      <%= form.label :fur, "Fur", class: "form-label" %>
+      <%= form.text_field :fur, class: "form-input" %>
+
+      <%= form.label :origin_address, "Origin Address", class: "form-label" %>
+      <%= form.text_field :origin_address, class: "form-input" %>
+
+      <%= form.label :origin_longitude, "Origin Longitude", class: "form-label" %>
+      <%= form.number_field :origin_longitude, step: :any, class: "form-input" %>
+
+      <%= form.label :origin_latitude, "Origin Latitude", class: "form-label" %>
+      <%= form.number_field :origin_latitude, step: :any, class: "form-input" %>
+
+      <%= form.label :cat_picture, "Upload Cat Picture", class: "form-label" %>
+      <%= form.file_field :cat_picture, class: "form-input" %>
+
+    </div>
+
+      <%= form.label :found, "Found?", class: "form-label" %>
+      <%= form.check_box :found, class: "form-checkbox" %>
+
+    <div class="cat-form">
+      <%= form.submit "Submit Report", class: "form-submit" %>
     </div>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-
-    <%= form.label :race %>
-    <%= form.text_field :race %>
-
-    <%= form.label :eye_color %>
-    <%= form.text_field :eye_color %>
-
-    <%= form.label :color %>
-    <%= form.text_field :color %>
-
-    <%= form.label :fur %>
-    <%= form.text_field :fur %>
-
-    <%= form.label :found %>
-    <%= form.check_box :found %>
-
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-
-    <%= form.label :origin_address %>
-    <%= form.text_field :origin_address %>
-
-    <%= form.label :origin_longitude %>
-    <%= form.number_field :origin_longitude, step: :any %>
-
-    <%= form.label :origin_latitude %>
-    <%= form.number_field :origin_latitude, step: :any %>
-
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= link_to "Back to List", cats_path, class: "back-link" %>
