@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Cats Section -->
+    <div class="col-md-6">
+      <% @cats.where(found: 'false').each do |cat| %>
+        <div class="card card-cat mb-4">
+          <div class="card-cat-infos">
+            <div>
+              <h2 class="card-title py-2"><strong>Name:</strong> <%= cat.name %></h2>
+              <p><strong>Color:</strong> <%= cat.color %></p>
+              <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+              <p><strong>Fur:</strong> <%= cat.fur %></p>
+              <p><strong>Race:</strong> <%= cat.race %></p>
+              <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+              <p><strong>City:</strong> <%= cat.city %></p>
+              <p><strong>Description:</strong> <%= cat.description %></p>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <% @sightings.where(city: 'Bonn').each do |sighting| %>
+        <div class="card card-sighting mb-4">
+          <div class="card-sighting-infos">
+            <div>
+              <h2 class="card-title py-2"><strong>Location:</strong></h2>
+              <p><strong>Latitude:</strong> <%= sighting.latitude %></p>
+              <p><strong>Longitude:</strong> <%= sighting.longitude %></p>
+              <p><strong>Address:</strong> <%= sighting.address %></p>
+              <p><strong>City:</strong> <%= sighting.city %></p>
+              <p><strong>Last Seen At:</strong> <%= sighting.last_seen_at.strftime("%B %d, %Y %H:%M") %></p> <!-- Formats the datetime -->
+              <p><strong>Description:</strong> <%= sighting.description %></p>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <p><strong>Reported by:</strong> <%= sighting.user.email %></p>
+            <% if sighting.cat %>
+              <p><strong>Cat:</strong> <%= sighting.cat.name %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

@@ -3,6 +3,7 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.all
+    @sightings = Sighting.all
   end
 
   def new
@@ -11,9 +12,10 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user = current_user
 
     if @cat.save
-      redirect_to @cat
+      redirect_to cat_path(@cat)
     else
       render :new
     end
@@ -29,6 +31,6 @@ class CatsController < ApplicationController
   end
 
   def cat_params
-    params.require(:cat).permit(:name)
+    params.require(:cat).permit(:name, :description, :race, :eye_color, :color, :fur, :origin_address, :city)
   end
 end
