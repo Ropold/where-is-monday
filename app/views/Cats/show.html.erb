@@ -1,0 +1,17 @@
+<h1>Cat Details</h1>
+
+<p><strong>Name:</strong> <%= @cat.name %></p>
+<p><strong>Description:</strong> <%= @cat.description %></p>
+<p><strong>Race:</strong> <%= @cat.race %></p>
+<p><strong>Eye Color:</strong> <%= @cat.eye_color %></p>
+<p><strong>Color:</strong> <%= @cat.color %></p>
+<p><strong>Fur:</strong> <%= @cat.fur %></p>
+<p><strong>Found:</strong> <%= @cat.found ? 'Yes' : 'No' %></p>
+<p><strong>User ID:</strong> <%= @cat.user_id %></p>
+<p><strong>Origin Address:</strong> <%= @cat.origin_address %></p>
+<p><strong>Origin Longitude:</strong> <%= @cat.origin_longitude %></p>
+<p><strong>Origin Latitude:</strong> <%= @cat.origin_latitude %></p>
+
+<%= link_to 'Edit', edit_cat_path(@cat) %> |
+<%= link_to 'Back to List', cats_path %> |
+<%= link_to 'Delete', @cat, method: :delete, data: { confirm: 'Are you sure?' } %>
