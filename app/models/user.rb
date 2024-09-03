@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :cats
+  has_many :cats, dependent: :destroy
   has_many :sightings
   has_many :cat_sightings, through: :cats, source: :sightings
   # Include default devise modules. Others available are:
