@@ -1,2 +1,39 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Lost & Found Cats</h1>
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Race</th>
+        <th>Eye Color</th>
+        <th>Color</th>
+        <th>Fur</th>
+        <th>Found</th>
+        <th>User ID</th>
+        <th>Origin Address</th>
+        <th>Origin Longitude</th>
+        <th>Origin Latitude</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cats.each do |cat| %>
+        <tr>
+          <td><%= cat.name %></td>
+          <td><%= cat.description %></td>
+          <td><%= cat.race %></td>
+          <td><%= cat.eye_color %></td>
+          <td><%= cat.color %></td>
+          <td><%= cat.fur %></td>
+          <td><%= cat.found %></td>
+          <td><%= cat.user_id %></td>
+          <td><%= cat.origin_address %></td>
+          <td><%= cat.origin_longitude %></td>
+          <td><%= cat.origin_latitude %></td>
+          <td><%= link_to "Show", cat %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+
+<%= link_to "New Cat Report", new_cat_path %>
