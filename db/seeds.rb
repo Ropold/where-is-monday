@@ -85,10 +85,10 @@ puts "Creating Sightings in Cologne:"
   Sighting.create!(
     longitude: 6.96 + rand(-0.01..0.01),  # Zufällige Längengrad-Koordinaten nahe Köln
     latitude: 50.94 + rand(-0.01..0.01),  # Zufällige Breitengrad-Koordinaten nahe Köln
-    last_seen_at: Time.current - rand(1..7).days,  # Sichtung innerhalb der letzten Woche
+    last_seen_at: Time.current - rand(1..7).days, # Sichtung innerhalb der letzten Woche
     description: "Katze gesichtet in Köln, Sichtung ##{i + 1}",
     address: "Köln, Deutschland",
-    user_id: user1.id,  # Weist die Sichtung dem Benutzer John Wayne zu
-    cat_id: Cat.all.sample.id  # Weist die Sichtung einer zufälligen Katze aus Köln zu
+    user_id: user1.id, # Weist die Sichtung dem Benutzer John Wayne zu
+    cat_id: Cat.all.sample.id # Weist die Sichtung einer zufälligen Katze aus Köln zu
   )
 end
