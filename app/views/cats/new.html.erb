@@ -1,0 +1,52 @@
+<!-- app/views/cats/_form.html.erb -->
+
+<%= form_with(model: @cat, local: true) do |form| %>
+  <% if @cat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cat.errors.count, "error") %>Easy:</h2>
+
+      <ul>
+        <% @cat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+
+    <%= form.label :race %>
+    <%= form.text_field :race %>
+
+    <%= form.label :eye_color %>
+    <%= form.text_field :eye_color %>
+
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+
+    <%= form.label :fur %>
+    <%= form.text_field :fur %>
+
+    <%= form.label :found %>
+    <%= form.check_box :found %>
+
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+
+    <%= form.label :origin_address %>
+    <%= form.text_field :origin_address %>
+
+    <%= form.label :origin_longitude %>
+    <%= form.number_field :origin_longitude, step: :any %>
+
+    <%= form.label :origin_latitude %>
+    <%= form.number_field :origin_latitude, step: :any %>
+
+    <%= form.submit %>
+  </div>
+<% end %>
