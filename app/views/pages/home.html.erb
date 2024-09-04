@@ -1,14 +1,13 @@
-
 <h1>Pages#home</h1>
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://cdn.pixabay.com/photo/2015/03/27/13/16/maine-coon-694730_960_720.jpg);">
   <div class="container text-center">
     <h1>Where is Monday - will help you</h1>
     <p>to find your cat!</p>
 
-    <!-- Suchfunktion eingebaut -->
-    <%= form_with url: root_path, method: :get, local: true, class: "search-form mt-4" do %>
+    <!-- Search function -->
+    <%= form_with url: cats_path, method: :get, local: true, class: "search-form mt-4" do %>
       <div class="form-group">
-        <%= label_tag :query, class: "form-label text-white" %>
+        <%= label_tag :query, "Search by city", class: "form-label text-white" %>
         <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control w-50" %>
       </div>
       <%= submit_tag "Search", class: "btn btn-primary mt-2" %>

@@ -1,8 +1,9 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="row">
     <!-- Cats Section -->
     <div class="col-md-6">
-      <% @cats.where(found: 'false').each do |cat| %>
+    <% if @cats.exists?%>
+      <strong><h1 class = "text-center my-4"><%= "Lost cats in: #{params[:query]}" %></h1></strong>
+      <% @cats.each do |cat| %>
         <div class="card card-cat mb-4">
           <div class="card-cat-infos">
             <div>
@@ -21,10 +22,15 @@
           </div>
         </div>
       <% end %>
+      <% else %>
+        <strong><h1 class = "text-center my-4"><%= "We have no lost cats in: #{params[:query]})" %></h1></strong>
+    <% end %>
     </div>
 
     <div class="col-md-6">
-      <% @sightings.where(city: 'Bonn').each do |sighting| %>
+    <% if @sightings.exists?%>
+      <strong><h2 class = "text-center my-4"><%= "Sightings without profile in: #{params[:query]}" %></h2></strong>
+      <% @sightings.each do |sighting| %>
         <div class="card card-sighting mb-4">
           <div class="card-sighting-infos">
             <div>
@@ -37,15 +43,10 @@
               <p><strong>Description:</strong> <%= sighting.description %></p>
             </div>
           </div>
-          <div class="card-footer text-right">
-            <p><strong>Reported by:</strong> <%= sighting.user.email %></p>
-            <% if sighting.cat %>
-              <p><strong>Cat:</strong> <%= sighting.cat.name %></p>
-            <% end %>
-          </div>
         </div>
       <% end %>
+      <% else %>
+        <strong><h2 class = "text-center my-4"><%= "No sightings from cats without profile in: #{params[:query]}" %></h2></strong>
+    <% end %>
     </div>
-
-  </div>
 </div>
