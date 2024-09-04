@@ -1,4 +1,4 @@
-<h1 style="text-align: center; color: gray;">New Cat</h1>
+<h1 style="text-align: center; color: gray;">Update your Cat</h1>
 
 <div class="cat-form-container">
   <%= form_with(model: @cat, local: true, html: { multipart: true }) do |form| %>
@@ -49,19 +49,15 @@
       <%= form.label :cat_picture, "Upload Cat Picture", class: "form-label" %>
       <%= form.file_field :cat_picture, class: "form-input" %>
 
-    <%= form.label :cat_picture, "Upload Cat Picture", class: "form-label" %>
-    <%= form.file_field :cat_picture, class: "form-input" %>
-
-
     </div>
 
       <%= form.label :found, "Found?", class: "form-label" %>
       <%= form.check_box :found, class: "form-checkbox" %>
 
     <div class="cat-form">
-      <%= form.submit "Submit Report", class: "form-submit" %>
+      <%= form.submit "Update cat", class: "form-submit" %>
     </div>
   <% end %>
 </div>
 
-<%= link_to "Back to List", cats_path, class: "back-link" %>
+<%= link_to "Back to your cat", cat_path(@cat), class: "back-link" %>

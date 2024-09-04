@@ -85,9 +85,6 @@ cat5 = Cat.create(
   origin_latitude: 51.0322
 )
 
-
-puts "Creating Sightings in 4x Cologne and 1x Leverkusen:"
-
 Sighting.create(
   longitude: 6.9603,
   latitude: 50.9375,
@@ -139,6 +136,29 @@ Sighting.create(
   description: "Spotted in Leverkusen, sitting on a bench.",
   address: "Rathaus-Galerie",
   city: "Leverkusen",
+  user_id: user1.id,
+  cat_id: cat5.id
+)
+
+
+Sighting.create(
+  longitude: 7.0192,
+  latitude: 51.0322,
+  last_seen_at: DateTime.now - 10.days,
+  description: "Spotted in Leverkusen, sitting on a bench.",
+  address: "Rathaus-Galerie",
+  city: "düsseldorf",
+  user_id: user1.id,
+  cat_id: cat5.id
+)
+
+Sighting.create(
+  longitude: 7.0192,
+  latitude: 51.0332,
+  last_seen_at: DateTime.now - 9.days,
+  description: "Spottecadcw in Leverkusen, sitting on a bench.",
+  address: "Rathaccwus-Galerie",
+  city: "Düsseldorf",
   user_id: user1.id,
   cat_id: cat5.id
 )
