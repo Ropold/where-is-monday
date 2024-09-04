@@ -24,6 +24,13 @@ cat1 = Cat.create(
   origin_longitude: 6.9576,
   origin_latitude: 50.9376
 )
+cat1.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
+)
+
+
 
 cat2 = Cat.create(
   name: "Simba",
@@ -38,6 +45,11 @@ cat2 = Cat.create(
   origin_address: "Neumarkt 1, Köln, Deutschland",
   origin_longitude: 6.9457,
   origin_latitude: 50.9372
+)
+cat2.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2017/08/07/16/36/cat-2605502_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
 )
 
 cat3 = Cat.create(
@@ -55,6 +67,12 @@ cat3 = Cat.create(
   origin_latitude: 50.9428
 )
 
+cat3.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2022/12/31/14/32/cat-7688749_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
+)
+
 cat4 = Cat.create(
   name: "Leo",
   description: "An energetic cat who enjoys climbing trees.",
@@ -68,6 +86,11 @@ cat4 = Cat.create(
   origin_address: "Rudolfplatz 5, Köln, Deutschland",
   origin_longitude: 6.9420,
   origin_latitude: 50.9378
+)
+cat4.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2017/03/14/14/49/cat-2143332_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
 )
 
 cat5 = Cat.create(
@@ -83,6 +106,11 @@ cat5 = Cat.create(
   origin_address: "Bahnhofstraße 8, Leverkusen, Deutschland",
   origin_longitude: 7.0086,
   origin_latitude: 51.0322
+)
+cat5.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2021/12/17/19/15/pet-6877246_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
 )
 
 Sighting.create(

@@ -1,39 +1,42 @@
-<h1 class="text-center pt-3">Your Cats</h1>
-<% @cats.each do |cat| %>
+<h1>My Cats</h1>
+
+<% @cats.order(created_at: :desc).each do |cat| %>
   <div class="container pt-4">
-  <div class="card my-3">
-    <div class="card-header bg-info text-white">
-      <h1 class="card-title mb-0">Cat Details</h1>
-    </div>
-    <div class="card-body d-flex m-5">
-      <div class="flex-grow-1 m-5">
-        <p><strong>Name:</strong> <%= cat.name %></p>
-        <p><strong>Description:</strong> <%= cat.description %></p>
-        <p><strong>Race:</strong> <%= cat.race %></p>
-        <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
-        <p><strong>Color:</strong> <%= cat.color %></p>
-        <p><strong>Fur:</strong> <%= cat.fur %></p>
-        <p><strong>Found:</strong> <%= cat.found ? 'Yes' : 'No' %></p>
-        <p><strong>City:</strong> <%= cat.city %></p>
-        <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
-        <p><strong>Origin Longitude:</strong> <%= cat.origin_longitude %></p>
-        <p><strong>Origin Latitude:</strong> <%= cat.origin_latitude %></p>
+    <div class="card my-3">
+      <div class="card-header bg-info text-white">
+        <h1 class="card-title mb-0">Cat Details</h1>
       </div>
-      <div class="cat-picture ml-4">
-        <% if cat %>
-          <%= image_tag href="https://th.bing.com/th/id/OIP.kds7FMl11rCBDNqZuvnmGgHaE8?w=238&h=180&c=7&r=0&o=5&dpr=2&pid=1.7", class: "img-fluid rounded", alt: "Picture of #{cat.name}" %>
-        <% else %>
-          <p>No picture available</p>
-        <% end %>
+      <div class="card-body d-flex m-5">
+        <div class="flex-grow-1 m-5">
+          <p><strong>Name:</strong> <%= cat.name %></p>
+          <p><strong>Description:</strong> <%= cat.description %></p>
+          <p><strong>Race:</strong> <%= cat.race %></p>
+          <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+          <p><strong>Color:</strong> <%= cat.color %></p>
+          <p><strong>Fur:</strong> <%= cat.fur %></p>
+          <p><strong>Found:</strong> <%= cat.found ? 'Yes' : 'No' %></p>
+          <p><strong>City:</strong> <%= cat.city %></p>
+          <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+          <p><strong>Origin Longitude:</strong> <%= cat.origin_longitude %></p>
+          <p><strong>Origin Latitude:</strong> <%= cat.origin_latitude %></p>
+        </div>
+        <div class="cat-picture ml-4">
+          <% if cat.photo.attached? %>
+            <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
+          <% else %>
+            <p>No picture available</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-footer bg-lightyellow">
+        <div class="d-flex justify-content-between">
+          <%= link_to 'Edit', edit_cat_path(cat), class: 'btn btn-info' %>
+          <%= link_to 'Back to home', root_path, class: 'btn btn-secondary' %>
+          <%= link_to 'Delete', cat_path(cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </div>
       </div>
     </div>
-    <div class="card-footer bg-lightyellow">
-      <div class="d-flex justify-content-between">
-        <%= link_to 'Edit', edit_cat_path(cat), class: 'btn btn-info' %>
-        <%= link_to 'Back to home', root_path, class: 'btn btn-secondary' %>
-        <%= link_to 'Delete', cat_path(cat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger"%>
-      </div>
-    </div>
-  <% end %>
   </div>
-</div>
+<% end %>
+
+
