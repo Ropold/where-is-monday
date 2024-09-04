@@ -3,7 +3,7 @@
     <h1>Where is Monday - will help you</h1>
     <p>to find your cat!</p>
 
-    <!-- Search function -->
+
     <%= form_with url: cats_path, method: :get, local: true, class: "search-form mt-4" do %>
       <div class="form-group">
         <%= label_tag :query, "Search by city", class: "form-label text-white" %>
@@ -14,45 +14,35 @@
   </div>
 </div>
 
-<div>
-  <h1>Lost & Found Cats</h1>
-  <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Race</th>
-          <th>Eye Color</th>
-          <th>Color</th>
-          <th>Fur</th>
-          <th>Found</th>
-          <th>User ID</th>
-          <th>Origin Address</th>
-          <th>Origin Longitude</th>
-          <th>Origin Latitude</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cats.each do |cat| %>
-          <tr>
-            <td><%= cat.name %></td>
-            <td><%= cat.city %></td>
-            <td><%= cat.description %></td>
-            <td><%= cat.race %></td>
-            <td><%= cat.eye_color %></td>
-            <td><%= cat.color %></td>
-            <td><%= cat.fur %></td>
-            <td><%= cat.found %></td>
-            <td><%= cat.user_id %></td>
-            <td><%= cat.origin_address %></td>
-            <td><%= cat.origin_longitude %></td>
-            <td><%= cat.origin_latitude %></td>
-            <td><%= link_to "Show", cat %></td>
-          </tr>
-        <% end %>
-      </tbody>
-  </table>
+<div class="container py-4">
+  <div class="row">
+    <% @cats.first(4).each do |cat| %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card">
+          <img src="https://i.pinimg.com/originals/02/ba/16/02ba16758c177bb63c81b022b82e480c.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-info">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-  <%= link_to "New Cat Report", new_cat_path %>
+  <div class="row">
+    <% @cats.select { |cat| cat.found? }.first(4).each do |cat| %>
+      <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+        <div class="card-cat">
+          <img src="https://i.pinimg.com/originals/02/ba/16/02ba16758c177bb63c81b022b82e480c.jpg" alt="">
+          <div class="card-content">
+            <h2>Card Heading</h2>
+            <p>xercitationem iste, voluptatum, quia explicabo laboriosam rem adipisci voluptates cumque, veritatis atque nostrum corrupti ipsa asperiores harum? Dicta odio aut hic.</p>
+            <a href="#" class="button">Find out more<span class="material-symbols-outlined">arrow_right_alt</span></a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>
