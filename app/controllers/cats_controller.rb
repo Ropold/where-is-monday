@@ -2,8 +2,14 @@ class CatsController < ApplicationController
   before_action :set_cat, only: [:show]
 
   def index
-    @cats = Cat.all
-    @sightings = Sighting.all
+    @cats = Cat.where(found: false)
+    if params[:query].present?
+      @sightings = Sighting.where(city: params[:query])
+      @cats = Cat.where(city: params[:query])
+    else
+      @sightings = Sighting.all
+      @cats = Cat.where(found: false)
+    end
   end
 
   def new
