@@ -3,11 +3,11 @@ Sighting.destroy_all
 User.destroy_all
 Cat.destroy_all
 
-puts "Creating Users:"
+puts "Creating 2 Users:"
 user1 = User.create(email: "john@wayne.com", password: "1234567898")
 user2 = User.create(email: "john@wick.com", password: "1234567898")
 
-puts "Creating Cats:"
+puts "Creating 4 Cats lost and 3 Cats found:"
 
 
 cat1 = Cat.create(
@@ -29,7 +29,6 @@ cat1.photo.attach(
   filename: 'photo.jpg',
   content_type: 'image/jpeg'
 )
-
 
 
 cat2 = Cat.create(
@@ -100,7 +99,7 @@ cat5 = Cat.create(
   eye_color: "Blue",
   color: "White and Brown",
   fur: "Long",
-  found: true,
+  found: false,
   user_id: user1.id,
   city: "Leverkusen",
   origin_address: "Bahnhofstraße 8, Leverkusen, Deutschland",
@@ -112,6 +111,48 @@ cat5.photo.attach(
   filename: 'photo.jpg',
   content_type: 'image/jpeg'
 )
+cat6 = Cat.create(
+  name: "Milo",
+  description: "A curious cat who loves to explore new places.",
+  race: "Bengal",
+  eye_color: "Green",
+  color: "Brown Spotted",
+  fur: "Short",
+  found: true,
+  user_id: user1.id,
+  city: "Köln",
+  origin_address: "Domkloster 4, Köln, Deutschland",
+  origin_longitude: 6.9583,
+  origin_latitude: 50.9413
+)
+cat6.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2015/11/16/22/14/cat-1046544_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
+)
+
+cat7 = Cat.create(
+  name: "Nala",
+  description: "A playful cat who enjoys chasing toys and interacting with people.",
+  race: "Siamese",
+  eye_color: "Blue",
+  color: "Cream with Dark Points",
+  fur: "Short",
+  found: true,
+  user_id: user2.id,
+  city: "Köln",
+  origin_address: "Heumarkt 50, Köln, Deutschland",
+  origin_longitude: 6.9603,
+  origin_latitude: 50.9352
+)
+cat7.photo.attach(
+  io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2015/12/04/21/53/cat-1077516_960_720.jpg')),
+  filename: 'photo.jpg',
+  content_type: 'image/jpeg'
+)
+
+
+puts "Creating 7 Sightings:"
 
 Sighting.create(
   longitude: 6.9603,
