@@ -1,8 +1,14 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://cdn.pixabay.com/photo/2019/09/14/09/44/cat-4475583_960_720.png" %>
-    <% end %>
+    <div class="d-flex">
+      <%= link_to root_path, class: "navbar-brand" do %>
+      <div class="d-flex">
+        <%= image_tag "https://cdn.pixabay.com/photo/2019/09/14/09/44/cat-4475583_960_720.png"  %>
+        
+      </div>
+      <% end %>
+    </div>
+
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,7 +21,10 @@
             <%= link_to "Messages", "#", class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "MyCat", "#", class: "nav-link" %>
+            <%= link_to "MyCats", my_cats_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "AddLostCat", new_cat_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "AddSighting", new_sighting_path, class: "nav-link" %>

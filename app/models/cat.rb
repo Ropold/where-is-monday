@@ -1,6 +1,6 @@
 class Cat < ApplicationRecord
   belongs_to :user
-  has_many :sightings
+  has_many :sightings, dependent: :destroy
   has_one_attached :photo
   validates :name, :color, :eye_color, :origin_address, :fur, :race, :description, :city, presence: true
 
