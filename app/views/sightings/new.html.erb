@@ -1,48 +1,31 @@
-<h1>New Sighting</h1>
 
-<%= form_with(model: @sighting, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :longitude, "Longitude" %>
-    <%= form.number_field :longitude, step: 'any', class: "form-control" %>
-  </div>
+<h1 style="text-align: center; color: gray;">New Sighting</h1>
 
-  <div class="form-group">
-    <%= form.label :latitude, "Latitude" %>
-    <%= form.number_field :latitude, step: 'any', class: "form-control" %>
-  </div>
+<div class="sighting-form-container">
+  <%= simple_form_for @sighting do |form| %>
+    <div class="sighting-form">
+      <%= form.label :longitude, "Longitude", class: "form-label" %>
+      <%= form.number_field :longitude, step: 'any', class: "form-input" %>
+      <%= form.label :latitude, "Latitude", class: "form-label" %>
+      <%= form.number_field :latitude, step: 'any', class: "form-input" %>
+      <%= form.label :city, "City", class: "form-label" %>
+      <%= form.text_field :city, class: "form-input" %>
+      <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
+      <%= form.datetime_select :last_seen_at, class: "form-input" %>
+      <%= form.label :description, "Description", class: "form-label" %>
+      <%= form.text_area :description, rows: 4, class: "form-textarea" %>
+      <%= form.label :address, "Address", class: "form-label" %>
+      <%= form.text_field :address, class: "form-input" %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.label :cat_id, "Cat", class: "form-label" %>
+      <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Dont know the cat" }, class: "form-input" %>
+      <%= form.input :photo, as: :file %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :city, "City" %>
-    <%= form.text_field :city, rows: 4, class: "form-control" %>
-  </div>
+    <div class="sighting-form">
+      <%= form.submit "Create Sighting", class: "form-submit" %>
+    </div>
+  <% end %>
+</div>
 
-  <div class="form-group">
-    <%= form.label :last_seen_at, "Last Seen At" %>
-    <%= form.datetime_select :last_seen_at, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description, "Description" %>
-    <%= form.text_area :description, rows: 4, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :address, "Address" %>
-    <%= form.text_field :address, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :cat_id, "Cat" %>
-    <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Select a cat" }, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.submit "Create Sighting", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', sightings_path, class: "btn btn-secondary" %>
+<%= link_to 'Back', sightings_path, class: "back-link" %>

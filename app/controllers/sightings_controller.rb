@@ -13,6 +13,7 @@ class SightingsController < ApplicationController
 
   def create
     @sighting = Sighting.new(sighting_params)
+    @sighting.user = current_user
     if @sighting.save
       redirect_to sightings_path
     else
@@ -42,6 +43,6 @@ class SightingsController < ApplicationController
   private
 
   def sighting_params
-    params.require(:sighting).permit(:last_seen_at, :latitude, :longitude, :description, :address, :user_id)
+    params.require(:sighting).permit(:last_seen_at, :latitude, :longitude, :description, :city, :address, :user_id, :cat_id, :photo)
   end
 end

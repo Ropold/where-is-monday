@@ -4,6 +4,7 @@
   <p><strong>Address:</strong> <%= @sighting.address %></p>
   <p><strong>Last Seen At:</strong> <%= @sighting.last_seen_at.strftime("%B %d, %Y %H:%M") %></p>
   <p><strong>Description:</strong> <%= @sighting.description %></p>
+  <p><%= cl_image_tag @sighting.photo.key, height: 300, width: 400, crop: :fill %></p>
 
   <h2>Location</h2>
   <ul>
@@ -13,7 +14,13 @@
 
   <h2>Associated Information</h2>
   <p><strong>Reported by User:</strong> <%= @sighting.user.email %></p>
-  <p><strong>Cat:</strong> <%= @sighting.cat.name %></p>
+
+  <% if @sighting.cat.present? %>
+      <p><strong>Cat:</strong> <%= @sighting.cat.name %></p>
+      <% else %>
+  <% end %>
+
+
 
   <hr>
   <p><em>Created at:</em> <%= @sighting.created_at.strftime("%B %d, %Y %H:%M") %></p>
