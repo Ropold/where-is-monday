@@ -5,6 +5,7 @@ ruby "3.1.2"
 gem "cloudinary"
 gem "pg_search"
 gem 'faker'
+gem "geocoder"
 gem 'validates_email_format_of'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
