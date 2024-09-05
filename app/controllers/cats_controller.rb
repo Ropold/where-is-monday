@@ -48,6 +48,7 @@ class CatsController < ApplicationController
   end
 
   def show
+
   end
 
   private
