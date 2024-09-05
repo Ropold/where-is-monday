@@ -179,7 +179,7 @@ Sighting.create(
 Sighting.create(
   last_seen_at: DateTime.now - 10.days,
   description: "Spotted in Leverkusen, sitting on a bench.",
-  address: "Rathaus-Galerie",
+  address: "Leverkusen Mitte",
   city: "Leverkusen",
   user_id: user1.id,
   cat_id: cat4.id
@@ -189,8 +189,8 @@ Sighting.create(
 Sighting.create(
   last_seen_at: DateTime.now - 10.days,
   description: "Spotted in Leverkusen, sitting on a bench.",
-  address: "Rathaus-Galerie",
-  city: "düsseldorf",
+  address: "Leverkusen Mitte",
+  city: "Leverkusen",
   user_id: user1.id,
   cat_id: cat5.id
 )
@@ -198,7 +198,7 @@ Sighting.create(
 Sighting.create(
   last_seen_at: DateTime.now - 9.days,
   description: "Spottecadcw in Leverkusen, sitting on a bench.",
-  address: "Rathaccwus-Galerie",
+  address: "Shadow-Arcaden Düsseldorf",
   city: "Düsseldorf",
   user_id: user1.id,
   cat_id: cat5.id
