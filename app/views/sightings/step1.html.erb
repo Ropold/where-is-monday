@@ -1,0 +1,9 @@
+<h1 style="text-align: center; color: gray;">Where did the sighting occur? (City)</h1>
+
+<%= form_with url: sightings_step2_path, method: :get, local: true, class: "search-form mt-4" do %>
+  <div class="form-group">
+    <%= label_tag :query, "Search by city", class: "form-label text-white" %>
+    <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control w-50" %>
+  </div>
+  <%= submit_tag "Search", class: "btn btn-primary mt-2" %>
+<% end %>
