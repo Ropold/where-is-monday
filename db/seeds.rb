@@ -182,7 +182,7 @@ Sighting.create(
   address: "Rathaus-Galerie",
   city: "Leverkusen",
   user_id: user1.id,
-  cat_id: cat5.id
+  cat_id: cat4.id
 )
 
 
