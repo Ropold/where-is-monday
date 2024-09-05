@@ -16,33 +16,62 @@
 
 <div class="container py-4">
   <div class="row">
-    <% @cats.first(4).each do |cat| %>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card-cat">
-          <img src="https://i.pinimg.com/originals/02/ba/16/02ba16758c177bb63c81b022b82e480c.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3 class="card-title"><%= cat.name %></h3>
-            <p class="card-text"><%= cat.description %></p>
-            <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+    <div class="text-center my-5">
+      <h4 style="font-weight: bold; font-size: 40px;">Recently Lost Cats:</h4>
+    </div>
+    <% @cats.first(4).each_with_index do |cat, index| %>
+      <% if index == 0 %>
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="card-cat">
+            <% if cat.photo.attached? %>
+              <%= cl_image_tag cat.photo.key, height: 600, width: 800, crop: :fill %>
+            <% end %>
+            <div class="card-body">
+              <h3 class="card-title"><%= cat.name %></h3>
+              <p class="card-text"><%= cat.description %></p>
+              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+            </div>
           </div>
         </div>
-      </div>
+      <% else %>
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+          <div class="card-cat">
+            <% if cat.photo.attached? %>
+              <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
+            <% end %>
+            <div class="card-body">
+              <h3 class="card-title"><%= cat.name %></h3>
+              <p class="card-text"><%= cat.description %></p>
+              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
   <div class="row">
+    <div class="text-center my-5">
+      <h4 style="font-weight: bold; font-size: 40px">Recently Found Cats:</h4>
+    </div>
     <% @cats.select { |cat| cat.found? }.first(4).each do |cat| %>
       <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
         <div class="card-cat">
-          <img src="https://i.pinimg.com/originals/02/ba/16/02ba16758c177bb63c81b022b82e480c.jpg" alt="">
+          <% if cat.photo.attached? %>
+            <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
+          <% end %>
           <div class="card-content">
             <h2><%= cat.name %></h2>
-            <p>xercitationem iste, voluptatum, quia explicabo laboriosam rem adipisci voluptates cumque, veritatis atque nostrum corrupti ipsa asperiores harum? Dicta odio aut hic.</p>
-            <a href="#" class="button">Find out more<span class="material-symbols-outlined">arrow_right_alt</span></a>
+            <p><%= cat.description %></p>
+            <%= link_to cat_path(cat), class: "button" do %>
+              Find out more <span class="material-symbols-outlined">arrow_right_alt</span>
+            <% end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+</div>
+
 
 </div>
