@@ -3,29 +3,38 @@
     <div class="col-md-6">
     <% if @cats.exists?%>
       <strong><h1 class = "text-center my-4"><%= "Lost cats in: #{params[:query]}" %></h1></strong>
-      <% @cats.each do |cat| %>
-        <div class="card card-cat mb-4">
-          <div class="card-cat-infos">
-            <div>
-              <h2 class="card-title py-2"><strong>Name:</strong> <%= cat.name %></h2>
-              <p><strong>Color:</strong> <%= cat.color %></p>
-              <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
-              <p><strong>Fur:</strong> <%= cat.fur %></p>
-              <p><strong>Race:</strong> <%= cat.race %></p>
-              <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
-              <p><strong>City:</strong> <%= cat.city %></p>
-              <p><strong>Description:</strong> <%= cat.description %></p>
-            </div>
-          </div>
-          <div class="card-footer text-right">
-
+    <% @cats.each do |cat| %>
+      <div class="card card-cat mb-4">
+        <div class="card-cat-infos">
+          <div>
+            <h2 class="card-title py-2">
+              <%= link_to cat.name, cat_path(cat), class: "card-title py-2" %>
+              <strong>Name:</strong>
+            </h2>
+            <p><strong>Color:</strong> <%= cat.color %></p>
+            <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+            <p><strong>Fur:</strong> <%= cat.fur %></p>
+            <p><strong>Race:</strong> <%= cat.race %></p>
+            <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+            <p><strong>City:</strong> <%= cat.city %></p>
+            <p><strong>Description:</strong> <%= cat.description %></p>
+            <% if cat.photo.attached? %>
+              <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
+            <% else %>
+              <p>No picture available</p>
+            <% end %>
           </div>
         </div>
-      <% end %>
+        <div class="card-footer text-right">
+        </div>
+      <%= link_to cat.name, cat_path(cat), class: "card-title py-2" %>
+      </div>
+    <% end %>
       <% else %>
         <strong><h1 class = "text-center my-4"><%= "We have no lost cats in: #{params[:query]})" %></h1></strong>
     <% end %>
     </div>
+
 
     <div class="col-md-6">
     <% if @sightings.exists?%>
