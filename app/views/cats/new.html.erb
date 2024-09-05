@@ -18,12 +18,8 @@
       <%= form.text_field :fur, class: "form-input" %>
       <%= form.label :origin_address, "Origin Address", class: "form-label" %>
       <%= form.text_field :origin_address, class: "form-input" %>
-      <%= form.label :origin_longitude, "Origin Longitude", class: "form-label" %>
-      <%= form.number_field :origin_longitude, step: :any, class: "form-input" %>
-      <%= form.label :origin_latitude, "Origin Latitude", class: "form-label" %>
-      <%= form.number_field :origin_latitude, step: :any, class: "form-input" %>
-      <%= form.label :city %>
-      <%= form.text_field :city %>
+      <%= form.label :city, "Origin City", class: "form-label" %>
+      <%= form.text_field :city, class: "form-input" %>
       <%= form.input :photo, as: :file%>
 
 

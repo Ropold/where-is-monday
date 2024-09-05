@@ -21,8 +21,6 @@ cat1 = Cat.create(
   user_id: user1.id,
   city: "Köln",
   origin_address: "Hohe Straße 30, Köln, Deutschland",
-  origin_longitude: 6.9576,
-  origin_latitude: 50.9376
 )
 cat1.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_960_720.jpg')),
@@ -42,8 +40,6 @@ cat2 = Cat.create(
   user_id: user2.id,
   city: "Köln",
   origin_address: "Neumarkt 1, Köln, Deutschland",
-  origin_longitude: 6.9457,
-  origin_latitude: 50.9372
 )
 cat2.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2017/08/07/16/36/cat-2605502_960_720.jpg')),
@@ -62,8 +58,6 @@ cat3 = Cat.create(
   user_id: user1.id,
   city: "Köln",
   origin_address: "Friesenstraße 15, Köln, Deutschland",
-  origin_longitude: 6.9448,
-  origin_latitude: 50.9428
 )
 
 cat3.photo.attach(
@@ -83,8 +77,6 @@ cat4 = Cat.create(
   user_id: user2.id,
   city: "Köln",
   origin_address: "Rudolfplatz 5, Köln, Deutschland",
-  origin_longitude: 6.9420,
-  origin_latitude: 50.9378
 )
 cat4.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2017/03/14/14/49/cat-2143332_960_720.jpg')),
@@ -103,8 +95,6 @@ cat5 = Cat.create(
   user_id: user1.id,
   city: "Leverkusen",
   origin_address: "Bahnhofstraße 8, Leverkusen, Deutschland",
-  origin_longitude: 7.0086,
-  origin_latitude: 51.0322
 )
 cat5.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2021/12/17/19/15/pet-6877246_960_720.jpg')),
@@ -122,8 +112,6 @@ cat6 = Cat.create(
   user_id: user1.id,
   city: "Köln",
   origin_address: "Domkloster 4, Köln, Deutschland",
-  origin_longitude: 6.9583,
-  origin_latitude: 50.9413
 )
 cat6.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2015/11/16/22/14/cat-1046544_960_720.jpg')),
@@ -142,8 +130,6 @@ cat7 = Cat.create(
   user_id: user2.id,
   city: "Köln",
   origin_address: "Heumarkt 50, Köln, Deutschland",
-  origin_longitude: 6.9603,
-  origin_latitude: 50.9352
 )
 cat7.photo.attach(
   io: URI.open(Cloudinary::Utils.cloudinary_url('https://cdn.pixabay.com/photo/2015/12/04/21/53/cat-1077516_960_720.jpg')),
@@ -155,8 +141,6 @@ cat7.photo.attach(
 puts "Creating 7 Sightings:"
 
 Sighting.create(
-  longitude: 6.9603,
-  latitude: 50.9375,
   last_seen_at: DateTime.now - 2.days,
   description: "Spotted near the Cologne Cathedral, climbing a tree.",
   address: "Domkloster 4",
@@ -166,8 +150,6 @@ Sighting.create(
 )
 
 Sighting.create(
-  longitude: 6.9794,
-  latitude: 50.9431,
   last_seen_at: DateTime.now - 5.days,
   description: "Seen playing with leaves in Rheinpark.",
   address: "Rheinparkweg 1",
@@ -177,8 +159,6 @@ Sighting.create(
 )
 
 Sighting.create(
-  longitude: 6.9645,
-  latitude: 50.9364,
   last_seen_at: DateTime.now - 3.days,
   description: "Found near the Chocolate Museum, looking for food.",
   address: "Am Schokoladenmuseum 1",
@@ -188,8 +168,6 @@ Sighting.create(
 )
 
 Sighting.create(
-  longitude: 6.9789,
-  latitude: 50.9578,
   last_seen_at: DateTime.now - 7.days,
   description: "Walking around near the Zoo entrance.",
   address: "Riehler Str. 173",
@@ -199,20 +177,16 @@ Sighting.create(
 )
 
 Sighting.create(
-  longitude: 7.0192,
-  latitude: 51.0322,
   last_seen_at: DateTime.now - 10.days,
   description: "Spotted in Leverkusen, sitting on a bench.",
   address: "Rathaus-Galerie",
   city: "Leverkusen",
   user_id: user1.id,
-  cat_id: cat5.id
+  cat_id: cat4.id
 )
 
 
 Sighting.create(
-  longitude: 7.0192,
-  latitude: 51.0322,
   last_seen_at: DateTime.now - 10.days,
   description: "Spotted in Leverkusen, sitting on a bench.",
   address: "Rathaus-Galerie",
@@ -222,8 +196,6 @@ Sighting.create(
 )
 
 Sighting.create(
-  longitude: 7.0192,
-  latitude: 51.0332,
   last_seen_at: DateTime.now - 9.days,
   description: "Spottecadcw in Leverkusen, sitting on a bench.",
   address: "Rathaccwus-Galerie",
