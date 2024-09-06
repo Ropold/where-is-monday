@@ -1,4 +1,3 @@
-
 <h1 style="text-align: center; color: gray;">New Sighting</h1>
 
 <div class="sighting-form-container">
@@ -13,15 +12,30 @@
       <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
       <%= form.datetime_select :last_seen_at, class: "form-input" %>
       <%= form.hidden_field :user_id, value: current_user.id %>
-      <%= form.label :cat_id, "Cat", class: "form-label" %>
-      <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Dont know the cat" }, class: "form-input" %>
-      <%= form.input :photo, as: :file %>
-    </div>
 
-    <div class="sighting-form">
-      <%= form.submit "Create Sighting", class: "form-submit" %>
-    </div>
-  <% end %>
+      <!-- Cat selection -->
+      <div class="cat-selection d-flex flex-wrap">
+        <div class="cat-option m-2">
+          <%= form.radio_button :cat_id, nil %>
+          <%= link_to image_tag('https://cdn.pixabay.com/photo/2024/04/02/18/01/ai-generated-8671408_960_720.png', height: 100, width: 100, crop: :fill), '#' %>
+          <p class="text-center">Don't know the cat</p>
+        </div>
+
+        <% @cats.each do |cat| %>
+          <div class="cat-option m-2">
+            <%= form.radio_button :cat_id, cat.id %>
+            <%= cl_image_tag cat.photo.key, height: 100, width: 100, crop: :fill %>
+            <p class="text-center"><%= cat.name %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form.input :photo, as: :file %>
+
+      <div class="sighting-form">
+        <%= form.submit "Create Sighting", class: "form-submit" %>
+      </div>
+    <% end %>
 </div>
 
 <%= link_to 'Back', sightings_path, class: "back-link" %>
