@@ -7,6 +7,7 @@
 
     <%= form_with url: cats_path, method: :get, local: true, class: "search-form mt-4" do %>
 
+
       <div class="form-group">
         <%= text_field_tag :query, params[:query], placeholder: "Enter your City", class: "form-control w-50 d-inline-block", style: "border-radius: 3%;" %>
         <%= submit_tag "Search", class: "btn btn-secondary d-inline-block ml-2 border", style: "border-radius: 10%;" %>

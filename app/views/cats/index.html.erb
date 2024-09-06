@@ -1,63 +1,75 @@
 <div class="row">
-    <!-- Cats Section -->
-    <div class="col-md-6">
-    <% if @cats.exists?%>
-      <strong><h1 class = "text-center my-4"><%= "Lost cats in: #{params[:query]}" %></h1></strong>
-
-    <% @cats.each do |cat| %>
-      <div class="card card-cat mb-4">
-        <div class="card-cat-infos">
-          <div>
-            <h2 class="card-title py-2">
-              <%= link_to cat.name, cat_path(cat), class: "card-title py-2" %>
-              <strong>Name:</strong>
-            </h2>
-            <p><strong>Color:</strong> <%= cat.color %></p>
-            <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
-            <p><strong>Fur:</strong> <%= cat.fur %></p>
-            <p><strong>Race:</strong> <%= cat.race %></p>
-            <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
-            <p><strong>City:</strong> <%= cat.city %></p>
-            <p><strong>Description:</strong> <%= cat.description %></p>
-            <% if cat.photo.attached? %>
-              <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
-            <% else %>
-              <p>No picture available</p>
-            <% end %>
-
+  <!-- Cats Section -->
+  <div class="col-md-6">
+    <% if @cats.exists? %>
+      <h1 class="text-center my-4"><strong>Lost cats in: <%= params[:query] %></strong></h1>
+      <% @cats.each do |cat| %>
+        <div class="card card-cat mb-4">
+          <div class="card-cat-infos">
+            <div>
+              <h2 class="card-title py-2">
+                <%= link_to cat.name, cat_path(cat), class: "card-title py-2" %>
+                <strong>Name:</strong>
+              </h2>
+              <p><strong>Color:</strong> <%= cat.color %></p>
+              <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+              <p><strong>Fur:</strong> <%= cat.fur %></p>
+              <p><strong>Race:</strong> <%= cat.race %></p>
+              <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+              <p><strong>City:</strong> <%= cat.city %></p>
+              <p><strong>Description:</strong> <%= cat.description %></p>
+              <% if cat.photo.attached? %>
+                <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
+              <% else %>
+                <p>No picture available</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <%= link_to "View Details", cat_path(cat), class: "btn btn-primary" %>
           </div>
         </div>
-        <div class="card-footer text-right">
-        </div>
-      <%= link_to cat.name, cat_path(cat), class: "card-title py-2" %>
-      </div>
+      <% end %>
+    <% else %>
+      <h1 class="text-center my-4"><strong>We have no lost cats in: <%= params[:query] %></strong></h1>
     <% end %>
-      <% else %>
-        <strong><h1 class = "text-center my-4"><%= "We have no lost cats in: #{params[:query]})" %></h1></strong>
-    <% end %>
-    </div>
+  </div>
 
-
-    <div class="col-md-6">
-    <% if @sightings.exists?%>
-      <strong><h2 class = "text-center my-4"><%= "Sightings without profile in: #{params[:query]}" %></h2></strong>
-      <% @sightings.each do |sighting| %>
-        <div class="card card-sighting mb-4">
-          <div class="card-sighting-infos">
-            <div>
-              <h2 class="card-title py-2"><strong>Location:</strong></h2>
-              <p><strong>Latitude:</strong> <%= sighting.latitude %></p>
-              <p><strong>Longitude:</strong> <%= sighting.longitude %></p>
+  <!-- Sightings Section -->
+  <div class="col-md-6">
+    <% if @sightings.exists? %>
+      <h2 class="text-center my-4"><strong>Sightings without profile in: <%= params[:query] %></strong></h2>
+      <% @sightings.order(created_at: :desc).each do |sighting| %>
+        <div class="card my-3">
+          <div class="card-header bg-info text-white">
+            <h1 class="card-title mb-0">Sighting Details</h1>
+          </div>
+          <div class="card-body d-flex">
+            <div class="flex-grow-1">
               <p><strong>Address:</strong> <%= sighting.address %></p>
+              <p><strong>Longitude:</strong> <%= sighting.longitude %></p>
+              <p><strong>Latitude:</strong> <%= sighting.latitude %></p>
               <p><strong>City:</strong> <%= sighting.city %></p>
-              <p><strong>Last Seen At:</strong> <%= sighting.last_seen_at.strftime("%B %d, %Y %H:%M") %></p> <!-- Formats the datetime -->
+              <p><strong>Last seen at:</strong> <%= sighting.last_seen_at %></p>
               <p><strong>Description:</strong> <%= sighting.description %></p>
+            </div>
+            <div class="cat-picture ml-4">
+              <% if sighting.photo.attached? %>
+                <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
+              <% else %>
+                <p>No picture available</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer bg-lightyellow">
+            <div class="d-flex justify-content-between">
+              <!-- Additional footer content can go here -->
             </div>
           </div>
         </div>
       <% end %>
-      <% else %>
-        <strong><h2 class = "text-center my-4"><%= "No sightings from cats without profile in: #{params[:query]}" %></h2></strong>
+    <% else %>
+      <h2 class="text-center my-4"><strong>No sightings without profile in: <%= params[:query] %></strong></h2>
     <% end %>
-    </div>
+  </div>
 </div>

@@ -10,19 +10,7 @@ class CatsController < ApplicationController
       @sightings = Sighting.all
       @cats = Cat.where(found: false)
     end
-    # @markers = @cats.geocoded.map do |cat|
-    #   {
-    #     lat: cat.origin_latitude,
-    #     lng: cat.origin_longitude,
-    #     info_window: render_to_string(partial: "info_window", locals: { cat: cat })
-    #   }
-    # end + @sightings.geocoded.map do |sighting|
-    #   {
-    #     lat: sighting.latitude,
-    #     lng: sighting.longitude,
-    #     info_window: render_to_string(partial: "info_window", locals: { sighting: sighting })
-    #   }
-    # end
+
   end
 
   def new
@@ -61,6 +49,7 @@ class CatsController < ApplicationController
   end
 
   def show
+
     @markers = @cat.sightings.geocoded.map do |sighting|
       {
         lat: sighting.latitude,
@@ -74,6 +63,7 @@ class CatsController < ApplicationController
       lng: @cat.origin_longitude,
       info_window_html: render_to_string(partial: "info_window", locals: { cat: @cat })
     }
+
   end
 
   private

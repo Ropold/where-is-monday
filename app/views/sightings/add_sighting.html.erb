@@ -1,4 +1,5 @@
-<h1 style="text-align: center; color: gray;">New Sighting</h1>
+
+<h1 style="text-align: center; color: gray;">Add sighting to <%=@cat.name%></h1>
 
 <div class="sighting-form-container">
   <%= simple_form_for @sighting do |form| %>
@@ -12,21 +13,16 @@
       <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
       <%= form.datetime_select :last_seen_at, class: "form-input" %>
       <%= form.hidden_field :user_id, value: current_user.id %>
-
-      <% if @cat.present? %>
-        <%= form.hidden_field :cat_id, value: @cat.id %>
-      <% else %>
-        <%= form.label :cat_id, "Cat", class: "form-label" %>
-        <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Don't know the cat" }, class: "form-input" %>
-      <% end %>
-
-
+      <%= form.hidden_field :cat_id, value: @cat.id %>
+      <%= form.label :cat_id, "Cat: #{@cat.name}", class: "form-label" %>
+      <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Dont know the cat" }, class: "form-input" %>
       <%= form.input :photo, as: :file %>
+    </div>
 
-      <div class="sighting-form">
-        <%= form.submit "Create Sighting", class: "form-submit" %>
-      </div>
-    <% end %>
+    <div class="sighting-form">
+      <%= form.submit "Create Sighting", class: "form-submit" %>
+    </div>
+  <% end %>
 </div>
 
 <%= link_to 'Back', sightings_path, class: "back-link" %>
