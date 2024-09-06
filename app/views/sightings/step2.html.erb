@@ -1,0 +1,30 @@
+<!-- app/views/cats/search_results.html.erb -->
+<div class = "d-flex">
+  <h1>You dont recognize the cat? Add a sighting without profile here --></h1>
+  <%= link_to "Add Sighting", new_sighting_path, class: "btn btn-info my-2 ms-3" %>
+</div>
+
+<% if !@cats.empty? %>
+  <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
+  <% @cats.each do |cat| %>
+    <div class="card mb-4">
+      <div class="card-cat-infos">
+        <div>
+          <h2 class="card-title py-2"><strong>Name:</strong> <%= cat.name %></h2>
+          <p><strong>Color:</strong> <%= cat.color %></p>
+          <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+          <p><strong>Fur:</strong> <%= cat.fur %></p>
+          <p><strong>Race:</strong> <%= cat.race %></p>
+          <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+          <p><strong>City:</strong> <%= cat.city %></p>
+          <p><strong>Description:</strong> <%= cat.description %></p>
+          <p class="d-flex justify-content-end"><%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info me-4" %></p>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <strong><h1 class="text-center my-4"><%= "We have no lost cats in: #{params[:query]}" %></h1></strong>
+<% end %>

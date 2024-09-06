@@ -40,6 +40,14 @@ class SightingsController < ApplicationController
     redirect_to sightings_path
   end
 
+  def step1
+    if params[:query].present?
+      @cats = Cat.search_by_city(params[:query])
+    else
+      @cats = Cat.where(found: false)
+    end
+  end
+
   private
 
   def sighting_params

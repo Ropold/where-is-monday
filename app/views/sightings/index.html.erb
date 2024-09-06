@@ -1,0 +1,22 @@
+  <div class="col-md-6">
+    <% if @sightings.exists?%>
+      <strong><h2 class = "text-center my-4"><%= "Sightings without profile in: #{params[:query]}" %></h2></strong>
+      <% @sightings.each do |sighting| %>
+        <div class="card card-sighting mb-4">
+          <div class="card-sighting-infos">
+            <div>
+              <h2 class="card-title py-2"><strong>Location:</strong></h2>
+              <p><strong>Latitude:</strong> <%= sighting.latitude %></p>
+              <p><strong>Longitude:</strong> <%= sighting.longitude %></p>
+              <p><strong>Address:</strong> <%= sighting.address %></p>
+              <p><strong>City:</strong> <%= sighting.city %></p>
+              <p><strong>Last Seen At:</strong> <%= sighting.last_seen_at.strftime("%B %d, %Y %H:%M") %></p> <!-- Formats the datetime -->
+              <p><strong>Description:</strong> <%= sighting.description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% else %>
+        <strong><h2 class = "text-center my-4"><%= "No sightings from cats without profile in: #{params[:query]}" %></h2></strong>
+    <% end %>
+  </div>
