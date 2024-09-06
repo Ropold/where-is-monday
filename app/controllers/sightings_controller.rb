@@ -9,14 +9,12 @@ class SightingsController < ApplicationController
 
   def new
     @sighting = Sighting.new
-    @cat = Cat.find(params[:cat_id]) if params[:cat_id].present?
-
   end
 
   def create
     @sighting = Sighting.new(sighting_params)
     @sighting.user = current_user
-    if @sighting.cat.present?
+    if @sighting.save && @sighting.cat.present?
       redirect_to cat_path(@sighting.cat)
     elsif @sighting.save
       redirect_to sightings_path
@@ -66,6 +64,6 @@ class SightingsController < ApplicationController
   private
 
   def sighting_params
-    params.require(:sighting).permit(:last_seen_at, :latitude, :longitude, :description, :city, :address, :user_id, :cat_id,:photo)
+    params.require(:sighting).permit(:last_seen_at, :latitude, :longitude, :description, :city, :address, :user_id, :cat_id, :photo)
   end
 end
