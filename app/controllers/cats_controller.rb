@@ -10,17 +10,6 @@ class CatsController < ApplicationController
       @sightings = Sighting.all
       @cats = Cat.where(found: false)
     end
-    @markers = @cats.geocoded.map do |cat|
-      {
-        lat: cat.origin_latitude,
-        lng: cat.origin_longitude
-      }
-    end + @sightings.geocoded.map do |sighting|
-      {
-        lat: sighting.latitude,
-        lng: sighting.longitude
-      }
-    end
   end
 
   def new
@@ -59,17 +48,6 @@ class CatsController < ApplicationController
   end
 
   def show
-    @markers = @cat.sightings.geocoded.map do |sighting|
-      {
-        lat: sighting.latitude,
-        lng: sighting.longitude
-      }
-    end
-
-    @markers << {
-      lat: @cat.origin_latitude,
-      lng: @cat.origin_longitude
-    }
   end
 
   private

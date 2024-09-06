@@ -33,9 +33,41 @@
     <div class="card-footer bg-lightyellow">
       <div class="d-flex justify-content-between">
         <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
-        <%= link_to 'Back to your cats', my_cats_path, class: 'btn btn-secondary' %>
+        <%= link_to 'Add your sighting', new_sighting_path(:cat_id => @cat.id), class: 'btn btn-secondary' %>
         <%= link_to 'Delete', cat_path(@cat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger"%>
       </div>
     </div>
   </div>
 </div>
+
+<% @cat.sightings.order(created_at: :desc).each do |sighting| %>
+  <div class="container pt-4">
+    <div class="card my-3">
+      <div class="card-header bg-info text-white">
+        <h1 class="card-title mb-0"></h1>
+      </div>
+      <div class="card-body d-flex m-5">
+        <div class="flex-grow-1 m-5">
+          <p><strong>Sighting:<address></address>:</strong> <%= sighting.address %></p>
+          <p><strong>longitude:</strong> <%= sighting.longitude %></p>
+          <p><strong>latitude:</strong> <%= sighting.latitude %></p>
+          <p><strong>City:</strong> <%= sighting.city %></p>
+          <p><strong>Last seen at:</strong> <%= sighting.last_seen_at %></p>
+          <p><strong>description:</strong> <%= sighting.description %></p>
+        </div>
+        <div class="cat-picture ml-4">
+          <% if sighting.photo.attached? %>
+            <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
+          <% else %>
+            <p>No picture available</p>
+          <% end %>
+      </div>
+      <div class="card-footer bg-lightyellow">
+        <div class="d-flex justify-content-between">
+          <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
+          <%= link_to 'Delete', cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
