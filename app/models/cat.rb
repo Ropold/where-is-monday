@@ -7,9 +7,7 @@ class Cat < ApplicationRecord
   after_validation :geocode_with_error_handling, if: :will_save_change_to_origin_address?
 
   include PgSearch::Model
-  pg_search_scope :search_by_city,
-  against: :city,
-  using: {
+  pg_search_scope :search_by_city, against: :city, using: {
     tsearch: {
       prefix: true
     }
@@ -18,10 +16,8 @@ class Cat < ApplicationRecord
   private
 
   def geocode_with_error_handling
-    begin
-      geocode
-    rescue Geocoder::Error => e
-      Rails.logger.error "Geocoding failed: #{e.message}"
-    end
+    geocode
+  rescue Geocoder::Error => e
+    Rails.logger.error "Geocoding failed: #{e.message}"
   end
 end

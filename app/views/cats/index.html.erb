@@ -3,6 +3,7 @@
     <div class="col-md-6">
     <% if @cats.exists?%>
       <strong><h1 class = "text-center my-4"><%= "Lost cats in: #{params[:query]}" %></h1></strong>
+
     <% @cats.each do |cat| %>
       <div class="card card-cat mb-4">
         <div class="card-cat-infos">
@@ -23,6 +24,7 @@
             <% else %>
               <p>No picture available</p>
             <% end %>
+
           </div>
         </div>
         <div class="card-footer text-right">
