@@ -9,6 +9,7 @@ class SightingsController < ApplicationController
 
   def new
     @sighting = Sighting.new
+    @cats = Cat.all
   end
 
   def create
