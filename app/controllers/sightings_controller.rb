@@ -44,17 +44,6 @@ class SightingsController < ApplicationController
     if params[:query].present?
       @cats = Cat.search_by_city(params[:query])
     else
-      @cats = Cat.all
-    end
-  end
-
-  def step2
-    # @cats = Cat.where(found: false)
-    if params[:query].present?
-      # @sightings = Sighting.search_by_city(params[:query])
-      @cats = Cat.search_by_city(params[:query])
-    else
-      # @sightings = Sighting.all
       @cats = Cat.where(found: false)
     end
   end
