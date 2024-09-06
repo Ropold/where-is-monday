@@ -1,0 +1,24 @@
+
+
+<!-- app/views/cats/_info_window.html.erb -->
+<% if defined?(sighting) && sighting.present? %>
+  <div>
+    <h3>Last seen <%= time_ago_in_words(sighting.last_seen_at) %> ago</h3>
+    <p><strong>Last Seen At:</strong> <%= sighting.last_seen_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+    <p><strong>Description:</strong> <%= sighting.description %></p>
+    <p><strong>Address:</strong> <%= sighting.address %></p>
+    <p><strong>City:</strong> <%= sighting.city %></p>
+  </div>
+<% elsif defined?(cat) && cat.present? %>
+  <div>
+    <h3>I lost here</h3>
+    <p><strong>Name:</strong> <%= cat.name %></p>
+    <p><strong>Race:</strong> <%= cat.race %></p>
+    <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
+    <p><strong>Color:</strong> <%= cat.color %></p>
+    <p><strong>Fur:</strong> <%= cat.fur %></p>
+    <p><strong>City:</strong> <%= cat.city %></p>
+    <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
+    <p><strong>Created At:</strong> <%= cat.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+  </div>
+<% end %>

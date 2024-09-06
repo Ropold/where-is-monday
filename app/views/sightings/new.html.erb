@@ -20,13 +20,13 @@
         <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Don't know the cat" }, class: "form-input" %>
       <% end %>
 
-      <%= form.input :photo, as: :file %>
-    </div>
 
-    <div class="sighting-form">
-      <%= form.submit "Create Sighting", class: "form-submit" %>
-    </div>
-  <% end %>
+      <%= form.input :photo, as: :file %>
+
+      <div class="sighting-form">
+        <%= form.submit "Create Sighting", class: "form-submit" %>
+      </div>
+    <% end %>
 </div>
 
 <%= link_to 'Back', sightings_path, class: "back-link" %>

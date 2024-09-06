@@ -10,6 +10,7 @@ class SightingsController < ApplicationController
   def new
     @sighting = Sighting.new
     @cat = Cat.find(params[:cat_id]) if params[:cat_id].present?
+
   end
 
   def create
