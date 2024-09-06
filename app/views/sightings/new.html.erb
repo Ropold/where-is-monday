@@ -11,14 +11,7 @@
       <%= form.text_area :description, rows: 4, class: "form-textarea" %>
       <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
       <%= form.datetime_select :last_seen_at, class: "form-input" %>
-      <%= form.hidden_field :user_id, value: current_user.id %>
-
-      <% if @cat.present? %>
-        <%= form.hidden_field :cat_id, value: @cat.id %>
-      <% else %>
-        <%= form.label :cat_id, "Cat", class: "form-label" %>
-        <%= form.collection_select :cat_id, Cat.all, :id, :name, { include_blank: "Don't know the cat" }, class: "form-input" %>
-      <% end %>
+      <%= form.hidden_field :cat_id, value: params[:cat_id] %>
 
 
       <%= form.input :photo, as: :file %>
