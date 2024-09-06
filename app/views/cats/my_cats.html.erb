@@ -19,6 +19,7 @@
           <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
           <p><strong>Origin Longitude:</strong> <%= cat.origin_longitude %></p>
           <p><strong>Origin Latitude:</strong> <%= cat.origin_latitude %></p>
+          <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
         </div>
         <div class="cat-picture ml-4">
           <% if cat.photo.attached? %>

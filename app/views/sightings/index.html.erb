@@ -24,12 +24,9 @@
               <% end %>
           </div>
           <div class="card-footer bg-lightyellow">
-            <div class="d-flex justify-content-between">
-              <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
-              <%= link_to 'Delete', cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-            </div>
           </div>
           </div>
         </div>
       </div>
+      <% end %>
     <% end %>
