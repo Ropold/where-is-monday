@@ -2,7 +2,7 @@
 
 <div class="sighting-form-container">
   <%= simple_form_for @sighting do |form| %>
-    <div class="sighting-form">
+  <%= @sighting.errors.full_messages %>
       <%= form.label :address, "Address", class: "form-label" %>
       <%= form.text_field :address, class: "form-input" %>
       <%= form.label :city, "City", class: "form-label" %>
@@ -12,14 +12,9 @@
       <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
       <%= form.datetime_select :last_seen_at, class: "form-input" %>
       <%= form.hidden_field :cat_id, value: params[:cat_id] %>
-
-
       <%= form.input :photo, as: :file %>
-
-      <div class="sighting-form">
-        <%= form.submit "Create Sighting", class: "form-submit" %>
-      </div>
-    <% end %>
+      <%= form.button :submit, class: "form-submit" %>
+  <% end %>
 </div>
 
 <%= link_to 'Back', sightings_path, class: "back-link" %>

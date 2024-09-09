@@ -24,7 +24,8 @@ class CatsController < ApplicationController
     if @cat.save
       redirect_to cat_path(@cat)
     else
-      render :new
+      render :new, status: :unprocessable_entity
+
     end
   end
 
@@ -49,7 +50,6 @@ class CatsController < ApplicationController
   end
 
   def show
-
     @markers = @cat.sightings.geocoded.map do |sighting|
       {
         lat: sighting.latitude,
@@ -67,7 +67,6 @@ class CatsController < ApplicationController
       timestamp: @cat.created_at.to_i,
       is_first: true
     }
-
   end
 
   private
