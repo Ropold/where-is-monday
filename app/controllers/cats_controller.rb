@@ -69,6 +69,13 @@ class CatsController < ApplicationController
     }
   end
 
+  def nearby
+    @cats = Cat.where(found: false).near([params[:latitude].to_f, params[:longitude].to_f], 10)
+    render json: @cats.map { |cat|
+      cat.as_json.merge({ photo_url: cat.photo.url })
+    }
+  end
+
   private
 
   def set_cat

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     member do
       get "add_sighting", to: "sightings#add_sighting"
     end
+    collection do
+      post "nearby",  to: "cats#nearby"
+    end
   end
   resources :sightings
   get "my_cats", to: "cats#my_cats"
