@@ -109,3 +109,13 @@
   height: 100%;
   z-index: 1;
 }
+
+.card-cat-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: orange;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold
+}

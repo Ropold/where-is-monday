@@ -11,7 +11,7 @@
   </div>
 <% elsif defined?(cat) && cat.present? %>
   <div>
-    <h3>I lost here</h3>
+    <h3>Lost here <%= time_ago_in_words(cat.created_at)%> ago </h3>
     <p><strong>Name:</strong> <%= cat.name %></p>
     <p><strong>Race:</strong> <%= cat.race %></p>
     <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
