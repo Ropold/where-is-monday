@@ -1,37 +1,51 @@
-<div class = "d-flex">
-  <h1 style="text-align: center; color: gray;">Where did the sighting occur? (City)</h1>
-  <%= link_to "Add Sighting", new_sighting_path, class: "btn btn-info my-2 ms-3" %>
-</div>
-
-<%= form_with url: sightings_step1_path, method: :get, local: true, class: "search-form mt-4" do %>
-  <div class="form-group">
-    <%= label_tag :query, "Search by city", class: "form-label text-white" %>
-    <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control w-50" %>
+<div class="container">
+  <!-- Title and Add Sighting Button -->
+  <div class="d-flex justify-content-center align-items-center mb-4">
+    <h1 style="color: gray;">Where did the sighting occur?</h1>
+    <%= link_to "Add Sighting", new_sighting_path, class: "btn btn-info my-2 ms-3" %>
   </div>
-  <%= submit_tag "Search", class: "btn btn-primary mt-2" %>
-<% end %>
 
-<% if !@cats.empty? %>
-  <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
-  <% @cats.each do |cat| %>
-    <div class="card mb-4">
-      <div class="card-cat-infos">
-        <div>
-          <h2 class="card-title py-2"><strong>Name:</strong> <%= cat.name %></h2>
-          <p><strong>Color:</strong> <%= cat.color %></p>
-          <p><strong>Eye Color:</strong> <%= cat.eye_color %></p>
-          <p><strong>Fur:</strong> <%= cat.fur %></p>
-          <p><strong>Race:</strong> <%= cat.race %></p>
-          <p><strong>Origin Address:</strong> <%= cat.origin_address %></p>
-          <p><strong>City:</strong> <%= cat.city %></p>
-          <p><strong>Description:</strong> <%= cat.description %></p>
-          <p class="d-flex justify-content-end"><%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info me-4" %></p>
+  <!-- Search Form -->
+  <div class="d-flex justify-content-center">
+    <%= form_with url: sightings_step1_path, method: :get, local: true, class: "search-form mt-4 d-flex align-items-center" do %>
+      <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control form-control-lg w-auto rounded-pill" %>
+      <%= submit_tag "Search", class: "btn btn-info btn-lg ms-2 rounded-pill" %>
+    <% end %>
+  </div>
+
+  <!-- Grid Layout for Cards -->
+  <% if !@cats.empty? %>
+    <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
+
+    <div class="grid">
+      <% @cats.each do |cat| %>
+        <div class="box card mb-4" style="position: relative;">
+          <!-- Cat Info inside each card -->
+          <div class="card-cat-infos">
+            <% if cat.photo.attached? %>
+              <%= cl_image_tag cat.photo.key, class: "card-img-top img-fluid" %>
+            <% end %>
+            <div class="card-body">
+              <h2 class="card-title py-2"><strong><%= cat.name %></strong></h2>
+              <p><strong><%= "#{cat.name} was lost at: " %></strong></p>
+              <p><%= cat.origin_address %></p>
+              <% if cat.sightings.any? %>
+              <p><strong><%= "Last seen at:" %></strong></p>
+              <p><%= cat.sightings.last.address %></p>
+              <p><%= cat.sightings.last.last_seen_at %></p>
+              <% else %>
+                <p><strong>No sightings available yet.</strong></p>
+              <% end %>
+              <p><strong>Description:</strong> <%= cat.description %></p>
+              <p class="d-flex justify-content-end" style="position: absolute; bottom: 10px; right: 10px;">
+                <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info" %>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="card-footer text-right">
-      </div>
+      <% end %>
     </div>
+  <% else %>
+    <strong><h1 class="text-center my-4"><%= "We have no lost cats in: #{params[:query]}" %></h1></strong>
   <% end %>
-<% else %>
-  <strong><h1 class="text-center my-4"><%= "We have no lost cats in: #{params[:query]}" %></h1></strong>
-<% end %>
+</div>

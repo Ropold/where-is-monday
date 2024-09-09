@@ -17,9 +17,9 @@ class SightingsController < ApplicationController
     if @sighting.save && @sighting.cat.present?
       redirect_to cat_path(@sighting.cat)
     elsif @sighting.save
-      redirect_to sightings_path
+      redirect_to sightings_path, notice: 'Sighting was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -55,7 +55,7 @@ class SightingsController < ApplicationController
     @sighting = Sighting.new
     @sighting.user = current_user
     if @sighting.save
-      redirect_to sightings_path
+      redirect_to sightings_path, notice: 'Sighting was successfully created.'
     else
       render :new
     end

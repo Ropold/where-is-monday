@@ -185,7 +185,6 @@ Sighting.create(
   cat_id: cat4.id
 )
 
-
 Sighting.create(
   last_seen_at: DateTime.now - 10.days,
   description: "Spotted in Leverkusen, sitting on a bench.",
@@ -203,5 +202,3 @@ Sighting.create(
   user_id: user1.id,
   cat_id: cat5.id
 )
-
-
