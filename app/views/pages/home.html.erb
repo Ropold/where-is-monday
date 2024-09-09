@@ -19,10 +19,9 @@
 
 
 
-
-
 <div class="container py-4" data-controller="nearby-cats">
   <div class="row" data-nearby-cats-target="container">
+
     <div class="text-center my-5">
       <h4 style="font-weight: bold; font-size: 40px;">Recently Lost Cats:</h4>
     </div>
@@ -34,12 +33,14 @@
               <%= cl_image_tag cat.photo.key, height: 600, width: 800, crop: :fill %>
             <% end %>
             <div class="overlay-text card-cat-label">
-            Recently Lost
+              Recently Lost
             </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
-              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+              <%= link_to cat_path(cat), class: "btn custom-btn" do %>
+                <i class="fa-solid fa-paw"></i>
+              <% end %>
             </div>
           </div>
         </div>
@@ -50,12 +51,14 @@
               <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
             <% end %>
             <div class="overlay-text card-cat-label">
-            Recently Lost
+              Recently Lost
             </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
-              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+              <%= link_to cat_path(cat), class: "btn custom-btn" do %>
+                <i class="fa-solid fa-paw"></i>
+              <% end %>
             </div>
           </div>
         </div>
@@ -75,19 +78,16 @@
           <% end %>
           <div class="overlay-text card-cat-label">
             Recently Found
-            </div>
+          </div>
           <div class="card-content">
             <h2><%= cat.name %></h2>
             <p><%= cat.description %></p>
-            <%= link_to cat_path(cat), class: "button" do %>
-              Find out more <span class="material-symbols-outlined">arrow_right_alt</span>
+            <%= link_to cat_path(cat), class: "btn custom-btn" do %>
+              <i class="fa-solid fa-paw"></i> <span class="material-symbols-outlined">arrow_right_alt</span>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-</div>
-
-
 </div>
