@@ -4,13 +4,13 @@ class CatsController < ApplicationController
   def index
     @cats = Cat.where(found: false)
     if params[:query].present?
-      @sightings = Sighting.search_by_city(params[:query])
+      @sightings = Sighting.search_by_city(params[:query]).where(cat_id: nil)
       @cats = Cat.search_by_city(params[:query])
+
     else
-      @sightings = Sighting.all
+      @sightings = Sighting.where(cat_id: nil)
       @cats = Cat.where(found: false)
     end
-
   end
 
   def new
@@ -54,14 +54,18 @@ class CatsController < ApplicationController
       {
         lat: sighting.latitude,
         lng: sighting.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { sighting: sighting })
+        info_window_html: render_to_string(partial: "info_window", locals: { sighting: sighting }),
+        timestamp: sighting.last_seen_at.to_i,
+        is_first: index == 0
       }
     end
 
     @markers << {
       lat: @cat.origin_latitude,
       lng: @cat.origin_longitude,
-      info_window_html: render_to_string(partial: "info_window", locals: { cat: @cat })
+      info_window_html: render_to_string(partial: "info_window", locals: { cat: @cat }),
+      timestamp: @cat.created_at.to_i,
+      is_first: true
     }
 
   end

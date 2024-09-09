@@ -23,13 +23,16 @@
     <div class="text-center my-5">
       <h4 style="font-weight: bold; font-size: 40px;">Recently Lost Cats:</h4>
     </div>
-    <% @cats.first(4).each_with_index do |cat, index| %>
+    <% @cats.select { |cat| !cat.found? }.first(4).each_with_index do |cat, index| %>
       <% if index == 0 %>
         <div class="col-lg-6 col-md-12 mb-4">
           <div class="card-cat">
             <% if cat.photo.attached? %>
               <%= cl_image_tag cat.photo.key, height: 600, width: 800, crop: :fill %>
             <% end %>
+            <div class="overlay-text card-cat-label">
+            Recently Lost
+            </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
@@ -43,6 +46,9 @@
             <% if cat.photo.attached? %>
               <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
             <% end %>
+            <div class="overlay-text card-cat-label">
+            Recently Lost
+            </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
@@ -64,6 +70,9 @@
           <% if cat.photo.attached? %>
             <%= cl_image_tag cat.photo.key, height: 300, width: 400, crop: :fill %>
           <% end %>
+          <div class="overlay-text card-cat-label">
+            Recently Found
+            </div>
           <div class="card-content">
             <h2><%= cat.name %></h2>
             <p><%= cat.description %></p>
