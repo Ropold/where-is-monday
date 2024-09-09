@@ -1,31 +1,43 @@
-
-    <% if @sightings.exists?%>
-      <strong><h2 class = "text-center my-4"><%= "Sightings without profile in: #{params[:query]}" %></h2></strong>
-      <% @sightings.order(created_at: :desc).each do |sighting| %>
-      <div class="container pt-4">
-        <div class="card my-3">
-          <div class="card-header bg-info text-white">
-            <h1 class="card-title mb-0"></h1>
-          </div>
-          <div class="card-body d-flex m-5">
-            <div class="flex-grow-1 m-5">
-              <p><strong>Sighting:<address></address>:</strong> <%= sighting.address %></p>
-              <p><strong>longitude:</strong> <%= sighting.longitude %></p>
-              <p><strong>latitude:</strong> <%= sighting.latitude %></p>
+<div class="container pt-4">
+  <% if @sightings.exists? %>
+    <% @sightings.order(created_at: :desc).each do |sighting| %>
+      <div class="card my-3">
+        <div class="card-header bg-info text-white">
+          <h1 class="card-title mb-0"></h1>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-7">
+              <p><strong>Sighting Address:</strong> <%= sighting.address %></p>
+              <p><strong>Longitude:</strong> <%= sighting.longitude %></p>
+              <p><strong>Latitude:</strong> <%= sighting.latitude %></p>
               <p><strong>City:</strong> <%= sighting.city %></p>
               <p><strong>Last seen at:</strong> <%= sighting.last_seen_at %></p>
-              <p><strong>description:</strong> <%= sighting.description %></p>
+              <p><strong>Description:</strong> <%= sighting.description %></p>
             </div>
-            <div class="cat-picture ml-4">
+            <div class="col-md-5 d-flex flex-column align-items-center">
               <% if sighting.photo.attached? %>
-                <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
+                <%= cl_image_tag sighting.photo.key, class: "img-fluid mb-3", style: "max-height: 300px; width: 100%;" %>
               <% else %>
                 <p>No picture available</p>
               <% end %>
+              <div class="sticky-map" style="width: 100%; height: 300px;"
+                data-controller="map"
+                data-map-markers-value="<%= @markers.to_json %>"
+                data-map-api-key-value="<%= ENV["MAPBOX_API_KEY"] %>">
+              </div>
+            </div>
           </div>
-          </div>
+        </div>
+        <div class="card-footer bg-lightyellow">
+          <div class="d-flex justify-content-between">
+            <%= link_to 'Edit', edit_sighting_path(sighting), class: 'btn btn-info' %>
+            <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
           </div>
         </div>
       </div>
-      <% end %>
     <% end %>
+  <% else %>
+    <p>No sightings available.</p>
+  <% end %>
+</div>

@@ -39,7 +39,8 @@ class SightingsController < ApplicationController
   def destroy
     @sighting = Sighting.find(params[:id])
     @sighting.destroy
-    redirect_to sightings_path
+    @cat = Cat.find(params[:id])
+    redirect_to cat_path(@cat)
   end
 
   def step1
