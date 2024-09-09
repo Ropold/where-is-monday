@@ -38,7 +38,7 @@
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
-              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning link" %>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
               <p class="card-text"><%= cat.description %></p>
-              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning" %>
+              <%= link_to "Find me", cat_path(cat), class: "btn btn-warning link" %>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
           <div class="card-content">
             <h2><%= cat.name %></h2>
             <p><%= cat.description %></p>
-            <%= link_to cat_path(cat), class: "button" do %>
+            <%= link_to cat_path(cat), class: "button link" do %>
               Find out more <span class="material-symbols-outlined">arrow_right_alt</span>
             <% end %>
           </div>

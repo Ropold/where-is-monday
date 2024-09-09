@@ -1,20 +1,34 @@
-<h1 style="text-align: center; color: gray;">New Sighting</h1>
-
-<div class="sighting-form-container">
+<div class="sighting-form-container mt-4 pt-4">
+  <h1 style="text-align: center; color: gray;">New Sighting</h1>
   <%= simple_form_for @sighting do |form| %>
-  <%= @sighting.errors.full_messages %>
+
+    <div class="sighting-form pb-4">
       <%= form.label :address, "Address", class: "form-label" %>
-      <%= form.text_field :address, class: "form-input" %>
+      <%= form.text_field :address, class: "form-input", placeholder: "e.g., 123 Cat Street" %>
+
       <%= form.label :city, "City", class: "form-label" %>
-      <%= form.text_field :city, class: "form-input" %>
+      <%= form.text_field :city, class: "form-input", placeholder: "e.g., San Francisco" %>
+
       <%= form.label :description, "Description", class: "form-label" %>
-      <%= form.text_area :description, rows: 4, class: "form-textarea" %>
-      <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
-      <%= form.datetime_select :last_seen_at, class: "form-input" %>
+      <%= form.text_area :description, rows: 4, class: "form-textarea", placeholder: "e.g., Brown tabby spotted at the park" %>
+
       <%= form.hidden_field :cat_id, value: params[:cat_id] %>
       <%= form.input :photo, as: :file %>
-      <%= form.button :submit, class: "form-submit" %>
+    </div>
+
+    <div>
+      <%= form.label :last_seen_at, "Date and Time of Last Sighting", class: "form-label" %>
+      <%= form.datetime_local_field :last_seen_at, class: "form-input", placeholder: "Select date and time" %>
+      <small class="form-hint">Provide the exact date and time the sighting occurred.</small>
+    </div>
+
+
+
+    <div class="sighting-form py-4">
+      <%= form.submit "Submit Sighting", class: "form-submit" %>
+    </div>
+
   <% end %>
 </div>
 
-<%= link_to 'Back', sightings_path, class: "back-link" %>
+<%= link_to "Back to sightings", sightings_path, class: "back-link" %>
