@@ -75,8 +75,8 @@
       </div>
       <div class="card-footer bg-lightyellow">
         <div class="d-flex justify-content-between">
-          <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
-          <%= link_to 'Delete', cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to 'Edit', edit_sighting_path(sighting), class: 'btn btn-info' %>
+      <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </div>
       </div>
     </div>
@@ -118,4 +118,3 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 </style>
-
