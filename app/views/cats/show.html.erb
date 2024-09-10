@@ -40,16 +40,23 @@
 
     <div class="card-footer bg-lightyellow">
       <div class="d-flex justify-content-between">
-        <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
-        <%= link_to 'Add your sighting', new_sighting_path(:cat_id => @cat.id), class: 'btn btn-secondary' %>
-        <%= link_to 'Delete', cat_path(@cat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger"%>
+        <%= link_to edit_cat_path(@cat), class: "btn custom-btn" do %>
+          <i class="fa-solid fa-paw blue-paw"></i>
+          <span class="details-text blue-paw">Edit</span>
+        <% end %>
+        <%= link_to cat_path(@cat), class: "btn custom-btn" do %>
+          <i class="fa-solid fa-paw orange-paw"></i>
+          <span class="details-text orange-paw">Details</span>
+        <% end %>
+        <%= link_to cat_path(@cat), data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn custom-btn" do %>
+          <i class="fa-solid fa-paw red-paw"></i>
+          <span class="details-text red-paw">Delete</span>
+        <% end %>
       </div>
-
     </div>
 
   </div>
 </div>
-
 
 <% @cat.sightings.order(created_at: :desc).each do |sighting| %>
   <div class="container pt-4">
@@ -72,11 +79,12 @@
           <% else %>
             <p>No picture available</p>
           <% end %>
+        </div>
       </div>
       <div class="card-footer bg-lightyellow">
         <div class="d-flex justify-content-between">
-      <%= link_to 'Edit', edit_sighting_path(sighting), class: 'btn btn-info' %>
-      <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <%= link_to 'Edit', edit_sighting_path(sighting), class: 'btn btn-info' %>
+          <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </div>
       </div>
     </div>
@@ -88,33 +96,81 @@
     font-size: 14px;
     margin: 7px 0;
     padding-top: 5px;
-    font-family: "Roboto", sans-serif;
   }
 
   .img-container {
     overflow: hidden;
-    border-radius: 10px;
   }
 
-  .hover-zoom {
-    transition: transform 0.5s ease;
+  .custom-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px; /* Add padding to make the button larger */
+    font-size: 1.5rem; /* Adjust font size for better alignment */
+    cursor: pointer; /* Add pointer cursor for better UX */
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center;
+    text-align: center;
+    color: inherit; /* Inherit color from the specific paw class */
+    transition: color 0.3s; /* Smooth transition for color */
+    margin: 0 10px; /* Add margin for spacing between buttons */
   }
 
-  .hover-zoom:hover {
-    transform: scale(1.05);
+  .custom-btn:hover .fa-paw,
+  .custom-btn:hover .details-text {
+    color: white; /* Change text and icon color to white on hover */
   }
 
-  .sticky-map {
-    position: sticky;
-    top: 20px;
+  .details-text {
+    font-size: 1rem; /* Smaller font size for the details text */
+    margin-top: 5px; /* Space between the icon and the text */
+    font-family: inherit; /* Inherit typography from the card */
+    color: inherit; /* Inherit color from the button */
   }
 
-  .btn-animate {
-    transition: all 0.3s ease-in-out;
+  .card-cat {
+    position: relative; /* Ensure the card is the positioning context */
+    padding-bottom: 20px; /* Ensure there is space for the button */
+    margin-bottom: 20px; /* Add margin to separate cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual separation */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    overflow: hidden; /* Ensure content does not overflow */
   }
 
-  .btn-animate:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  .card-body {
+    padding: 20px; /* Add padding inside the card */
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between; /* Ensure buttons are spaced evenly */
+    align-items: center; /* Align items vertically */
+  }
+
+  .mt-3 {
+    margin-top: 1rem; /* Add margin-top for spacing */
+  }
+
+  .px-3 {
+    padding-left: 1rem; /* Add padding-left for spacing */
+    padding-right: 1rem; /* Add padding-right for spacing */
+  }
+
+  .red-paw {
+    color: rgba(218, 39, 39, 0.736);
+  }
+
+  .blue-paw {
+    color: rgb(35, 209, 228);
+  }
+
+  /* Additional color classes */
+  .green-paw {
+    color: green;
+  }
+
+  .orange-paw {
+    color: orange;
   }
 </style>
