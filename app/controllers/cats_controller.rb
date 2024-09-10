@@ -36,6 +36,11 @@ class CatsController < ApplicationController
     redirect_to cat_path(@cat)
   end
 
+  def found
+    @cat = Cat.find(params[:id])
+    @cat.update(found: true)
+  end
+
   def destroy
     @cat = Cat.find(params[:id])
     @cat.destroy
