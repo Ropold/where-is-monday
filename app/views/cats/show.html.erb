@@ -20,8 +20,6 @@
           <p><strong>Hair color:</strong> <%= @cat.color %></p>
           <p><strong>Fur type:</strong> <%= @cat.fur %></p>
           <p class="<%= @cat.found ? "text-warning" : "text-success" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
-
-
         </div>
 
         <div class="col-md-7">
@@ -41,6 +39,9 @@
               <%= link_to edit_cat_path(@cat), class: "text-dark me-3" do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
+              <button class="btn btn-success me-3" onclick="confirmAndPatch(<%= @cat.id %>)">
+                <i class="fa-solid fa-house-flag"></i>
+              </button>
             <% else %>
               <%= link_to "Add your sighting", new_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
             <% end %>
@@ -50,32 +51,45 @@
       </div>
 
       <% @cat.sightings.order(created_at: :desc).each do |sighting| %>
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p><strong>Message:</strong> <%= sighting.description %></p>
-              <% if sighting.user == current_user %>
-                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-              <% else %>
-              	<%= link_to "Decline", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-              <% end %>
-            </div>
-            <div class="card-footer text-body-secondary">
-              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
-            </div>
-              <!--<div class="cat-picture ml-4">
-                <% if sighting.photo.attached? %>
-                  <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
-                <% else %>
-                  <p>No picture available</p>
-                <% end %>
-              </div> -->
+        <div class="card text-center mt-3">
+          <div class="card-header">
+            <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
           </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p><strong>Message:</strong> <%= sighting.description %></p>
+            <% if sighting.user == current_user %>
+              <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+            <% else %>
+              <%= link_to "Decline", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+            <% end %>
+          </div>
+          <div class="card-footer text-body-secondary">
+            Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
 
+<script>
+  function confirmAndPatch(catId) {
+    if (confirm("Has your cat been found?")) {
+      fetch(`/cats/${catId}/found`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ found: true })
+      }).then(response => {
+        if (response.ok) {
+          location.reload();
+        } else {
+          alert('Failed to update the status.');
+        }
+      });
+    }
+  }
+</script>
