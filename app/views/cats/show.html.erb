@@ -1,120 +1,79 @@
-<div class="pt-4 m-4">
+<div class="container-fluid">
   <div class="row">
 
-    <div class="col-md-5">
-      <div class="sticky-map" style="width: 100%; height: 600px;"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV["MAPBOX_API_KEY"] %>">
-      </div>
+    <div class="map col-md-6 sticky-top border border-dark-subtle"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV["MAPBOX_API_KEY"] %>">
     </div>
 
-    <div class="col-md-7 d-flex align-items-start">
+    <div class="col-md-6 bg-white">
+      <div class="cat-show-card row my-3">
+        <div class="cat-details col-md-5">
+          <h4><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h4>
+          <p><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></p>
+          <br>
+          <h5>Cat description:</h5>
+          <p><%= @cat.description %></p>
+          <p><strong>Race:</strong> <%= @cat.race %></p>
+          <p><strong>Eye color:</strong> <%= @cat.eye_color %></p>
+          <p><strong>Hair color:</strong> <%= @cat.color %></p>
+          <p><strong>Fur type:</strong> <%= @cat.fur %></p>
+          <p class="<%= @cat.found ? "text-warning" : "text-success" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
 
-      <div class="mb-4 me-4 cat-details">
-        <h1 style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase; font-size: 28px;">Cat Details</h1>
-        <p><strong>Name:</strong> <%= @cat.name %></p>
-        <p><strong>Description:</strong> <%= @cat.description %></p>
-        <p><strong>Race:</strong> <%= @cat.race %></p>
-        <p><strong>Eye Color:</strong> <%= @cat.eye_color %></p>
-        <p><strong>Color:</strong> <%= @cat.color %></p>
-        <p><strong>Fur:</strong> <%= @cat.fur %></p>
-        <p><strong>Found:</strong> <%= @cat.found ? "Yes" : "No" %></p>
-        <p><strong>City:</strong> <%= @cat.city %></p>
-        <p><strong>Origin Address:</strong> <%= @cat.origin_address %></p>
-        <p><strong>Origin Longitude:</strong> <%= @cat.origin_longitude %></p>
-        <p><strong>Origin Latitude:</strong> <%= @cat.origin_latitude %></p>
-      </div>
-
-      <div class="mb-4">
-        <% if @cat %>
-          <div class="img-container">
-            <%= cl_image_tag @cat.photo.key, height: 440, width: 470, crop: :fill, class: "rounded img-fluid hover-zoom" %>
-          </div>
-        <% else %>
-          <p>No picture available</p>
-        <% end %>
-      </div>
-
-    </div>
-
-    <div class="card-footer bg-lightyellow">
-      <div class="d-flex justify-content-between">
-        <%= link_to 'Edit', edit_cat_path(@cat), class: 'btn btn-info' %>
-        <%= link_to 'Add your sighting', new_sighting_path(:cat_id => @cat.id), class: 'btn btn-secondary' %>
-        <%= link_to 'Delete', cat_path(@cat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger"%>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-
-<% @cat.sightings.order(created_at: :desc).each do |sighting| %>
-  <div class="container pt-4">
-    <div class="card my-3">
-      <div class="card-header bg-info text-white">
-        <h1 class="card-title mb-0"></h1>
-      </div>
-      <div class="card-body d-flex m-5">
-        <div class="flex-grow-1 m-5">
-          <p><strong>Sighting:<address></address>:</strong> <%= sighting.address %></p>
-          <p><strong>longitude:</strong> <%= sighting.longitude %></p>
-          <p><strong>latitude:</strong> <%= sighting.latitude %></p>
-          <p><strong>City:</strong> <%= sighting.city %></p>
-          <p><strong>Last seen at:</strong> <%= sighting.last_seen_at %></p>
-          <p><strong>description:</strong> <%= sighting.description %></p>
         </div>
-        <div class="cat-picture ml-4">
-          <% if sighting.photo.attached? %>
-            <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
+
+        <div class="col-md-7">
+          <% if @cat.photo.attached? %>
+            <div class="img-container">
+              <%= cl_image_tag @cat.photo.key, class: "rounded img-fluid hover-zoom" %>
+            </div>
           <% else %>
             <p>No picture available</p>
           <% end %>
-      </div>
-      <div class="card-footer bg-lightyellow">
-        <div class="d-flex justify-content-between">
-      <%= link_to 'Edit', edit_sighting_path(sighting), class: 'btn btn-info' %>
-      <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <div class="card-actions d-flex flex-row-reverse pt-3">
+
+            <% if @cat.user == current_user %>
+              <%= link_to cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-3" do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+              <%= link_to edit_cat_path(@cat), class: "text-dark me-3" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+            <% else %>
+              <%= link_to "Add your sighting", new_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
+            <% end %>
+
+          </div>
         </div>
       </div>
+
+      <% @cat.sightings.order(created_at: :desc).each do |sighting| %>
+          <div class="card text-center mt-3">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p><strong>Message:</strong> <%= sighting.description %></p>
+              <% if sighting.user == current_user %>
+                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+              <% else %>
+              	<%= link_to "Decline", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+              <% end %>
+            </div>
+            <div class="card-footer text-body-secondary">
+              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
+            </div>
+              <!--<div class="cat-picture ml-4">
+                <% if sighting.photo.attached? %>
+                  <%= cl_image_tag sighting.photo.key, height: 300, width: 400, crop: :fill %>
+                <% else %>
+                  <p>No picture available</p>
+                <% end %>
+              </div> -->
+          </div>
+      <% end %>
     </div>
   </div>
-<% end %>
-
-<style>
-  .cat-details p {
-    font-size: 14px;
-    margin: 7px 0;
-    padding-top: 5px;
-    font-family: "Roboto", sans-serif;
-  }
-
-  .img-container {
-    overflow: hidden;
-    border-radius: 10px;
-  }
-
-  .hover-zoom {
-    transition: transform 0.5s ease;
-  }
-
-  .hover-zoom:hover {
-    transform: scale(1.05);
-  }
-
-  .sticky-map {
-    position: sticky;
-    top: 20px;
-  }
-
-  .btn-animate {
-    transition: all 0.3s ease-in-out;
-  }
-
-  .btn-animate:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-</style>
+</div>

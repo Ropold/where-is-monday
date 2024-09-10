@@ -1,12 +1,5 @@
-.cat-title {
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 .cat-details p {
-  font-size: 16px;
+  font-size: 14px;
   margin: 5px 0;
   font-family: "Roboto", sans-serif;
 }
@@ -14,6 +7,7 @@
 .img-container {
   overflow: hidden;
   border-radius: 10px;
+  // height: 440 width: 400, crop: :fill,
 }
 
 .hover-zoom {
@@ -24,9 +18,8 @@
   transform: scale(1.05);
 }
 
-.sticky-map {
-  position: sticky;
-  top: 20px;
+.map {
+  height: 92vh;
 }
 
 
