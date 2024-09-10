@@ -37,9 +37,9 @@
 
   <!-- Sightings Section -->
   <div class="col-md-6">
-    <% if @sightings.exists? %>
+    <% if @sightings %>
       <h2 class="text-center my-4"><strong>Sightings without profile in: <%= params[:query] %></strong></h2>
-      <% @sightings.order(last_seen_at: :desc).each do |sighting| %>
+      <% @sightings.each do |sighting| %>
         <div class="card my-3">
           <div class="card-header bg-info text-white">
             <h1 class="card-title mb-0">Sighting Details</h1>

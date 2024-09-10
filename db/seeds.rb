@@ -349,7 +349,7 @@ cats.each do |cat|
 end
 
 # Allgemeine Sightings für die Städte erstellen
-puts "Creating 10 general sightings for each city:"
+puts "Creating 10 general sightings for Köln, Leverkusen, Bonn:"
 require 'open-uri'
 
 # Städte und Adressen
@@ -365,14 +365,15 @@ images = [
   'https://cdn.pixabay.com/photo/2018/03/27/17/25/cat-3266673_960_720.jpg',
   'https://cdn.pixabay.com/photo/2022/10/15/21/23/cat-7523894_960_720.jpg',
   'https://cdn.pixabay.com/photo/2020/11/26/07/41/maine-coon-5778153_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2018/11/29/23/34/cat-3846780_960_720.jpg'
-]
+  'https://cdn.pixabay.com/photo/2018/11/29/23/34/cat-3846780_960_720.jpg',
+  'https://cdn.pixabay.com/photo/2016/02/10/16/37/cat-1192026_960_720.jpg'
+].shuffle
 
 cities.each do |city, addresses|
 
   # Erstelle 2 Sichtungen mit Bild
   2.times do
-    image_url = images.sample
+    image_url = images.shift
     Sighting.create!(
       cat: nil,
       user_id: user2.id,

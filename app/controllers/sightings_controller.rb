@@ -1,6 +1,7 @@
 class SightingsController < ApplicationController
   def index
     @sightings = Sighting.all
+    # @sightings = Sighting.order(created_at: :desc)
   end
 
   def show
