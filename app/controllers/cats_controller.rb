@@ -3,13 +3,10 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.where(found: false)
+    @sightings = Sighting.geocoded.where(cat_id: nil)
     if params[:query].present?
-      @sightings = Sighting.search_by_city(params[:query]).where(cat_id: nil)
+      @sightings = @sightings.search_by_city(params[:query]).sort_by { |sighting| sighting.last_seen_at }.reverse
       @cats = Cat.search_by_city(params[:query])
-
-    else
-      @sightings = Sighting.where(cat_id: nil)
-      @cats = Cat.where(found: false)
     end
   end
 
