@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resources :cats do
     member do
       get "add_sighting", to: "sightings#add_sighting"
+      patch "found", to: "cats#found"
     end
     collection do
-      post "nearby",  to: "cats#nearby"
+      post "nearby", to: "cats#nearby"
     end
   end
   resources :sightings
