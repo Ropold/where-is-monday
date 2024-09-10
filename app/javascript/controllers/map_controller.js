@@ -35,10 +35,33 @@ export default class extends Controller {
   }
 
   #addLineToMap() {
-    // Marker nach Zeitstempel sortieren
-    const sortedMarkers = this.markersValue.sort((a, b) => a.timestamp - b.timestamp)
+
+    console.log('Markers before sorting:', this.markersValue)
+
+    // Filter out markers with invalid coordinates or timestamps
+    const validMarkers = this.markersValue.filter(marker => {
+      return marker.lng && marker.lat && marker.timestamp
+    })
+
+    // Debugging: Log valid markers
+    console.log('Valid markers:', validMarkers)
+
+    // Sort markers by timestamp
+    const sortedMarkers = validMarkers.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+
+    // Debugging: Log sorted markers
+    console.log('Sorted markers:', sortedMarkers)
+
+    // Extract coordinates from sorted markers
     const coordinates = sortedMarkers.map(marker => [marker.lng, marker.lat])
-    console.log('Adding line with coordinates:', coordinates) // Debugging
+
+    // Debugging: Log coordinates
+    console.log('Adding line with coordinates:', coordinates)
+    // // Marker nach Zeitstempel sortieren
+    // console.log('Markers before sorting:', this.markersValue)
+    // const sortedMarkers = this.markersValue.sort((a, b) => a.timestamp - b.timestamp)
+    // const coordinates = sortedMarkers.map(marker => [marker.lng, marker.lat])
+    // console.log('Adding line with coordinates:', coordinates) // Debugging
 
     this.map.addSource('line', {
       'type': 'geojson',

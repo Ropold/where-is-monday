@@ -1,0 +1,47 @@
+.custom-btn {
+  background: none;
+  border: none;
+  padding: 10px 20px; /* Add padding to make the button larger */
+  font-size: 3rem; /* Increase the font size */
+  cursor: pointer; /* Add pointer cursor for better UX */
+  position: absolute;
+  bottom: 20px; /* Adjusted to position the button lower */
+  left: 0px; /* Position further to the left */
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;
+  text-align: center;
+}
+
+.custom-btn:hover {
+  color: #ffffff !important; /* Hover color */
+}
+
+.details-text {
+  font-size: 1rem; /* Smaller font size for the details text */
+  margin-top: 5px; /* Space between the icon and the text */
+  font-family: inherit; /* Inherit typography from the card */
+  color: inherit; /* Inherit color from the button */
+}
+
+.card-cat {
+  position: relative; /* Ensure the card is the positioning context */
+  padding-bottom: 70px; /* Ensure there is space for the button */
+}
+
+.red-paw {
+  color: red;
+}
+
+.blue-paw {
+  color: blue;
+}
+
+/* Additional color classes */
+.green-paw {
+  color: green;
+}
+
+.orange-paw {
+  color: orange;
+}
