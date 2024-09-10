@@ -47,13 +47,14 @@ class CatsController < ApplicationController
   end
 
   def show
-    @markers = @cat.sightings.geocoded.map do |sighting|
+    sorted_sightings = @cat.sightings.geocoded.order(last_seen_at: :asc)
+    @markers = sorted_sightings.map.with_index do |sighting, index|
       {
         lat: sighting.latitude,
         lng: sighting.longitude,
         info_window_html: render_to_string(partial: "info_window", locals: { sighting: sighting }),
         timestamp: sighting.last_seen_at.to_i,
-        is_first: index == 0
+        is_last: index == sorted_sightings.size - 1
       }
     end
 
@@ -62,9 +63,33 @@ class CatsController < ApplicationController
       lng: @cat.origin_longitude,
       info_window_html: render_to_string(partial: "info_window", locals: { cat: @cat }),
       timestamp: @cat.created_at.to_i,
-      is_first: true
+      is_first: true,
+      is_last: false
     }
   end
+
+  # def show
+  #   @markers = @cat.sightings.geocoded.map do |sighting|
+  #     {
+  #       lat: sighting.latitude,
+  #       lng: sighting.longitude,
+  #       info_window_html: render_to_string(partial: "info_window", locals: { sighting: sighting }),
+  #       timestamp: sighting.last_seen_at.to_i,
+  #       is_first: index == 0,
+  #       is_last: index == @cat.sightings.count - 1
+  #     }
+  #   end
+
+  #   @markers << {
+  #     lat: @cat.origin_latitude,
+  #     lng: @cat.origin_longitude,
+  #     info_window_html: render_to_string(partial: "info_window", locals: { cat: @cat }),
+  #     timestamp: @cat.created_at.to_i,
+  #     is_first: true,
+  #     is_last: false
+  #   }
+  # end
+
 
   def nearby
     @cats = Cat.where(found: false).near([params[:latitude].to_f, params[:longitude].to_f], 10)
