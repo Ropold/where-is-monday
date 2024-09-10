@@ -1,7 +1,6 @@
 class SightingsController < ApplicationController
   def index
     @sightings = Sighting.all
-    # @sightings = Sighting.order(created_at: :desc)
   end
 
   def show
@@ -61,6 +60,18 @@ class SightingsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def accept
+    @sighting = Sighting.find(params[:id])
+    @sighting.update(status: 'accepted')
+    redirect_to @sighting.cat, notice: 'Sighting was successfully accepted.'
+  end
+
+  def reject
+    @sighting = Sighting.find(params[:id])
+    @sighting.update(status: 'rejected')
+    redirect_to @sighting.cat, notice: 'Sighting was successfully rejected.'
   end
 
   private

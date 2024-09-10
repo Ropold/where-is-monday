@@ -50,7 +50,8 @@
         </div>
       </div>
 
-      <% @cat.sightings.order(created_at: :desc).each do |sighting| %>
+    <% if @cat.user == current_user %>
+      <% @cat.sightings.where(status: 'pending').order(created_at: :desc).each do |sighting| %>
         <div class="card text-center mt-3">
           <div class="card-header">
             <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
@@ -58,17 +59,30 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p><strong>Message:</strong> <%= sighting.description %></p>
-            <% if sighting.user == current_user %>
-              <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-            <% else %>
-              <%= link_to "Decline", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-            <% end %>
+              <%= link_to "Reject", reject_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+              <%= link_to "Accept", accept_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
           </div>
           <div class="card-footer text-body-secondary">
             Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
           </div>
         </div>
       <% end %>
+      <% else %>
+        <% @cat.sightings.where(status: 'accepted' && 'pending').order(created_at: :desc).each do |sighting| %>
+          <div class="card text-center mt-3">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p><strong>Message:</strong> <%= sighting.description %></p>
+              <% if sighting.user == current_user %>
+              <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <% end %>
+            </div>
+        <% end %>
+
+    <% end %>
     </div>
   </div>
 </div>
