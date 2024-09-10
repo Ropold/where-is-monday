@@ -63,7 +63,15 @@ class SightingsController < ApplicationController
   end
 
   def accept
-    @sighting.update
+    @sighting = Sighting.find(params[:id])
+    @sighting.update(status: 'accepted')
+    redirect_to @sighting.cat, notice: 'Sighting was successfully accepted.'
+  end
+
+  def reject
+    @sighting = Sighting.find(params[:id])
+    @sighting.update(status: 'rejected')
+    redirect_to @sighting.cat, notice: 'Sighting was successfully rejected.'
   end
 
   private
