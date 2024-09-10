@@ -61,7 +61,8 @@
             <% if sighting.user == current_user %>
               <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
             <% else %>
-              <%= link_to "Decline", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+              <%= link_to "Reject", reject_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+              <%= link_to "Accept", accept_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
             <% end %>
           </div>
           <div class="card-footer text-body-secondary">

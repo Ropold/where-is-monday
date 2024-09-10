@@ -11,7 +11,13 @@ Rails.application.routes.draw do
       post "nearby", to: "cats#nearby"
     end
   end
-  resources :sightings
+  resources :sightings do
+    member do
+      patch "accept", to: "sightings#accept"
+      patch "reject", to: "sightings#reject"
+    end
+  end
+
   get "my_cats", to: "cats#my_cats"
   get "sightings_step1", to: "sightings#step1"
   get "sightings_step2", to: "sightings#step2"
