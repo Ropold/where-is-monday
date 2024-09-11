@@ -294,8 +294,6 @@ leverkusen_addresses = [
   "Im Eisholz 1, Leverkusen", "Schlebuscher Straße 23, Leverkusen", "Bebelstraße 12, Leverkusen"
 ].shuffle
 
-
-
 puts "Created 5 sightings for Luna-Cat1 in Köln with user2.id"
 
 # Spezifische Adressen in der Kölner Innenstadt für Luna
@@ -303,8 +301,7 @@ puts "Created 5 sightings for Luna-Cat1 in Köln with user2.id"
 koeln_innenstadt_addresses = [
   "Domkloster 4, Köln", "Neumarkt 1, Köln", "Heumarkt 50, Köln", "Rudolfplatz 5, Köln",
   "Friesenstraße 15, Köln"
-].shuffle  # Mische die Adressen zufällig
-
+].shuffle # Mische die Adressen zufällig
 
 5.times do |i|
   Sighting.create!(
@@ -350,7 +347,6 @@ end
 
 # Allgemeine Sightings für die Städte erstellen
 puts "Creating 10 general sightings for Köln, Leverkusen, Bonn:"
-require 'open-uri'
 
 # Städte und Adressen
 cities = {
@@ -374,7 +370,7 @@ cities.each do |city, addresses|
   # Erstelle 2 Sichtungen mit Bild
   2.times do
     image_url = images.shift
-    Sighting.create!(
+    new_sighting = Sighting.create!(
       cat: nil,
       user_id: user2.id,
       address: addresses.shift,
