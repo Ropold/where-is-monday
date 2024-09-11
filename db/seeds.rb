@@ -5,9 +5,10 @@ Sighting.destroy_all
 User.destroy_all
 Cat.destroy_all
 
-puts "Creating 2 Users:"
+puts "Creating 3 Users:"
 user1 = User.create(email: "john@wayne.com", password: "1234567898")
 user2 = User.create(email: "john@wick.com", password: "1234567898")
+user3 = User.create(email: "john@lost.com", password: "1234567898")
 
 puts "Creating 4 Cats lost and 3 Cats found:"
 
@@ -19,7 +20,7 @@ cat1 = Cat.create(
   color: "Gray",
   fur: "Short",
   found: false,
-  user_id: user1.id,
+  user_id: user3.id,
   city: "Köln",
   origin_address: "Weisenhausgasse 20, Köln, Deutschland",
   created_at: Time.now - rand(15..20).days
@@ -294,25 +295,54 @@ leverkusen_addresses = [
   "Im Eisholz 1, Leverkusen", "Schlebuscher Straße 23, Leverkusen", "Bebelstraße 12, Leverkusen"
 ].shuffle
 
-puts "Created 5 sightings for Luna-Cat1 in Köln with user2.id"
+puts "Created 5 sightings for Luna-Cat1 (user3 = john@lost.com) in Köln with user2.id & user1.id"
 
-# Spezifische Adressen in der Kölner Innenstadt für Luna
-# Mische die Adressen und nutze jede nur einmal
-koeln_innenstadt_addresses = [
-  "Domkloster 4, Köln", "Neumarkt 1, Köln", "Heumarkt 50, Köln", "Rudolfplatz 5, Köln",
-  "Friesenstraße 15, Köln"
-].shuffle # Mische die Adressen zufällig
+Sighting.create!(
+  cat: cat1,
+  user_id: user2.id,
+  address: "Domkloster 4, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - 1.days,
+  description: "I think I spotted Luna resting near the cathedral, looking a bit tired.",
+  status: "pending"
+)
 
-5.times do |i|
-  Sighting.create!(
-    cat: cat1,
-    user_id: user2.id,
-    address: koeln_innenstadt_addresses.shift,  # Nimm die Adresse und entferne sie aus dem Array
-    city: "Köln",
-    last_seen_at: Time.now - rand(1..14).days,
-    description: "Sighting of Luna in the heart of Köln"
-  )
-end
+Sighting.create!(
+  cat: cat1,
+  user_id: user1.id,
+  address: "Neumarkt 1, Köln",  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - 2.days,
+  description: "Near Neumarkt, Luna seemed weak and was moving very slowly.",
+  status: "pending"
+)
+Sighting.create!(
+  cat: cat1,
+  user_id: user2.id,
+  address: "Heumarkt 50, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - 5.days,
+  description: "Pretty sure I saw Luna wandering near Heumarkt, her fur a bit dirty and unkempt.",
+  status: "accepted"
+)
+Sighting.create!(
+  cat: cat1,
+  user_id: user1.id,
+  address: "Rudolfplatz 5, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - 7.days,
+  description: "Luna was likely seen hiding at Rudolfplatz, looking anxious and weary.",
+  status: "accepted"
+)
+Sighting.create!(
+  cat: cat1,
+  user_id: user1.id,
+  address: "Friesenstraße 15, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - 10.days,
+  description: "I might have spotted Luna on Friesenstraße, looking calm and relaxed",
+  status: "accepted"
+)
 
 
 puts "Creating new Sightings to cat2 - cat12:"
@@ -340,10 +370,12 @@ cats.each do |cat|
       address: addresses.shift,
       city: city,
       last_seen_at: Time.now - rand(1..14).days,
-      description: "Sighting of #{cat.name} in #{city}"
+      description: "Sighting of #{cat.name} in #{city}",
+      status: "accepted"
     )
   end
 end
+
 
 # Allgemeine Sightings für die Städte erstellen
 puts "Creating 10 general sightings for Köln, Leverkusen, Bonn:"
@@ -377,6 +409,7 @@ cities.each do |city, addresses|
       city: city,
       last_seen_at: Time.now - rand(1..14).days,
       description: "General sighting in #{city}",
+      status: "accepted",
       photo: {
         io: URI.open(image_url),
         filename: File.basename(image_url),
@@ -392,7 +425,8 @@ cities.each do |city, addresses|
       address: addresses.shift,
       city: city,
       last_seen_at: Time.now - rand(1..14).days,
-      description: "General sighting in #{city}"
+      description: "General sighting in #{city}",
+      status: "accepted"
     )
   end
 end

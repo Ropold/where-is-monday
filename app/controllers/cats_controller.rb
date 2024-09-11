@@ -52,7 +52,7 @@ class CatsController < ApplicationController
   end
 
   def show
-    sorted_sightings = @cat.sightings.geocoded.order(last_seen_at: :asc)
+    sorted_sightings = @cat.sightings.geocoded.where(status: 'accepted').order(last_seen_at: :asc)
     @markers = sorted_sightings.map.with_index do |sighting, index|
       {
         lat: sighting.latitude,
