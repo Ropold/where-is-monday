@@ -1,6 +1,6 @@
 <div class="sighting-form-container mt-4 pt-4">
   <h1 style="text-align: center; color: gray;">New Sighting</h1>
-  <%= simple_form_for @sighting do |form| %>
+  <%= simple_form_for [@cat, @sighting] do |form| %>
 
     <div class="sighting-form pb-4">
       <%= form.label :address, "Address", class: "form-label" %>
@@ -21,8 +21,6 @@
       <%= form.datetime_local_field :last_seen_at, class: "form-input", placeholder: "Select date and time" %>
       <small class="form-hint">Provide the exact date and time the sighting occurred.</small>
     </div>
-
-
 
     <div class="sighting-form py-4">
       <%= form.submit "Submit Sighting", class: "form-submit" %>

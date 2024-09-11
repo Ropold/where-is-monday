@@ -4,7 +4,7 @@ class Sighting < ApplicationRecord
   enum status: { pending: "pending", accepted: "accepted", rejected: "rejected" }
 
   has_one_attached :photo
-  validates :description, :address, :last_seen_at, :city, presence: true
+  validates :description, :address, :last_seen_at, presence: true
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 

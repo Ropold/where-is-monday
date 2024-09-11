@@ -18,7 +18,7 @@
     <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
 
     <div class="grid">
-      <% @cats.each do |cat| %>
+      <% @cats.order(created_at: :desc).each do |cat| %>
         <div class="box card mb-4" style="position: relative;">
           <!-- Cat Info inside each card -->
           <div class="card-cat-infos">
