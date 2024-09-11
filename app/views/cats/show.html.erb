@@ -83,7 +83,7 @@
 
       <!-- Accepted Sightings -->
 
-      <div id="accepted-sightings" style="display: none;">
+      <div id="accepted-sightings">
         <% @cat.sightings.where(status: 'accepted').order(last_seen_at: :desc).each do |sighting| %>
 
           <div class="card text-center mt-3">
