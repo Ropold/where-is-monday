@@ -282,7 +282,7 @@ leverkusen_addresses = [
   "Birkenbergstraße 7, Leverkusen", "Kölner Straße 26, Leverkusen", "Berliner Platz 5, Leverkusen",
   "Alkenrather Straße 18, Leverkusen", "Goethestraße 9, Leverkusen", "Mittelstraße 4, Leverkusen",
   "Dönhoffstraße 14, Leverkusen", "Quettinger Straße 20, Leverkusen", "Rheindorfer Straße 30, Leverkusen",
-  "Steinsträßchen 8, Leverkusen", "Hitdorfer Straße 6, Leverkusen", "Morsbroicher Straße 10, Leverkusen",
+  "Hitdorfer Straße 6, Leverkusen", "Morsbroicher Straße 10, Leverkusen",
   "Haberstraße 32, Leverkusen", "Industriestraße 21, Leverkusen", "Königsberger Platz 2, Leverkusen",
   "Robert-Blum-Straße 11, Leverkusen", "Willy-Brandt-Ring 13, Leverkusen", "Bahnhofstraße 28, Leverkusen",
   "Heinrich-Brüning-Straße 14, Leverkusen", "Bergische Landstraße 15, Leverkusen",

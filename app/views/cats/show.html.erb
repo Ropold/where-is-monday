@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <% @cat.sightings.order(created_at: :desc).each do |sighting| %>
+      <% @cat.sightings.order(last_seen_at: :desc).each do |sighting| %>
         <div class="card text-center mt-3">
           <div class="card-header">
             <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
