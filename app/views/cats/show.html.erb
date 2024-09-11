@@ -50,8 +50,9 @@
         </div>
       </div>
 
+
     <% if @cat.user == current_user %>
-      <% @cat.sightings.where(status: 'pending').order(created_at: :desc).each do |sighting| %>
+      <% @cat.sightings.where(status: 'pending').order(last_seen_at: :desc).each do |sighting| %>
         <div class="card text-center mt-3">
           <div class="card-header">
             <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
@@ -68,7 +69,7 @@
         </div>
       <% end %>
       <% else %>
-        <% @cat.sightings.where(status: 'accepted' && 'pending').order(created_at: :desc).each do |sighting| %>
+        <% @cat.sightings.where(status: 'accepted' && 'pending').order(last_seen_at: :desc).each do |sighting| %>
           <div class="card text-center mt-3">
             <div class="card-header">
               <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
