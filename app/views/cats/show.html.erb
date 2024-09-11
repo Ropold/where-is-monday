@@ -85,7 +85,7 @@
 
       <div id="accepted-sightings" style="display: none;">
         <% @cat.sightings.where(status: 'accepted').order(last_seen_at: :desc).each do |sighting| %>
-        
+
           <div class="card text-center mt-3">
             <div class="card-header">
               <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
@@ -95,6 +95,9 @@
               <p><strong>Sighting by :</strong> <%= sighting.user.email %></p>
               <p><strong>Message:</strong> <%= sighting.description %></p>
               <% if sighting.user == current_user %>
+                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+              <% end %>
+              <% if @cat.user == current_user %>
                 <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
               <% end %>
 
