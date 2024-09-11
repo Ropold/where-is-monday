@@ -1,0 +1,10 @@
+.image-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
