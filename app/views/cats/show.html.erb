@@ -12,6 +12,7 @@
         <div class="cat-details col-md-5">
           <h4><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h4>
           <p><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></p>
+          <p class="<%= @cat.found ? "text-success" : "text-warning" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
           <br>
           <h5>Cat description:</h5>
           <p><%= @cat.description %></p>
@@ -19,7 +20,6 @@
           <p><strong>Eye color:</strong> <%= @cat.eye_color %></p>
           <p><strong>Hair color:</strong> <%= @cat.color %></p>
           <p><strong>Fur type:</strong> <%= @cat.fur %></p>
-          <p class="<%= @cat.found ? "text-warning" : "text-success" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
         </div>
 
         <div class="col-md-7">
