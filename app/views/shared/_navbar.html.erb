@@ -2,8 +2,8 @@
   <div class="container-fluid">
       <%= link_to root_path, class: "navbar-brand" do %>
         <div class="d-flex align-items-center">
-          <%= image_tag "https://cdn.pixabay.com/photo/2019/09/14/09/44/cat-4475583_960_720.png", style: "width: 50px; height: auto;" %>
-          <h5 class="main-font pt-1 ps-2">WHERE IS <br>  MONDAY</h5>
+          <%= image_tag "new_logo.png", style: "width: 90px; height: auto;" %>
+
         </div>
       <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,19 +14,19 @@
       <ul class="navbar-nav me-auto pt-2">
         <% if user_signed_in? %>
 
-          <li class="nav-item me-2">
+          <li class="nav-item me-3">
             <%= link_to new_cat_path, class: "nav-link" do %>
-              <h5>I lost my cat</h5>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">I lost my cat</h6>
             <% end %>
           </li>
-          <li class="nav-item me-2">
+          <li class="nav-item me-3">
             <%= link_to sightings_step1_path, class: "nav-link" do %>
-              <h5>I saw a Cat</h5>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">I saw a Cat</h6>
             <% end %>
           </li>
-            <li class="nav-item me-2">
+            <li class="nav-item me-3">
             <%= link_to cat_path(current_user.cats.last), class: "nav-link" do %>
-              <h5>My Cat</h5>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">My Cat</h6>
             <% end %>
           </li>
           <li class="nav-item dropdown">
