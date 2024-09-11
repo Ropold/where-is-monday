@@ -43,33 +43,51 @@
                 <i class="fa-solid fa-house-flag"></i>
               </button>
             <% else %>
-              <%= link_to "Add your sighting", new_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
+              <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
             <% end %>
 
           </div>
         </div>
       </div>
 
+      <!-- Selection Mechanism -->
+      <div class="sighting-toggle my-3">
+        <% if @cat.user == current_user %>
+          <button class="btn btn-primary" onclick="showPendingSightings()">Pending Sightings</button>
+        <% end %>
+        <button class="btn btn-secondary" onclick="showAcceptedSightings()">Accepted Sightings</button>
+      </div>
 
-    <% if @cat.user == current_user %>
-      <% @cat.sightings.where(status: 'pending').order(last_seen_at: :desc).each do |sighting| %>
-        <div class="card text-center mt-3">
-          <div class="card-header">
-            <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p><strong>Message:</strong> <%= sighting.description %></p>
-              <%= link_to "Reject", reject_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-              <%= link_to "Accept", accept_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
-          </div>
-          <div class="card-footer text-body-secondary">
-            Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
-          </div>
+      <!-- Pending Sightings -->
+      <% if @cat.user == current_user %>
+        <div id="pending-sightings">
+          <% @cat.sightings.where(status: 'pending').order(last_seen_at: :desc).each do |sighting| %>
+            <div class="card text-center mt-3">
+              <div class="card-header">
+                <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p><strong>Message:</strong> <%= sighting.description %></p>
+                <% if sighting.user == current_user %>
+                  <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+                <% else %>
+                  <%= link_to "Reject", reject_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+                  <%= link_to "Accept", accept_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
+                <% end %>
+              </div>
+              <div class="card-footer text-body-secondary">
+                Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
-      <% else %>
-        <% @cat.sightings.where(status: 'accepted' && 'pending').order(last_seen_at: :desc).each do |sighting| %>
+
+      <!-- Accepted Sightings -->
+      <div id="accepted-sightings" style="display: none;">
+        <% @cat.sightings.where(status: 'accepted').order(created_at: :desc).each do |sighting| %>
+
           <div class="card text-center mt-3">
             <div class="card-header">
               <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
@@ -78,17 +96,42 @@
               <h5 class="card-title"></h5>
               <p><strong>Message:</strong> <%= sighting.description %></p>
               <% if sighting.user == current_user %>
-              <%= link_to 'Delete', sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+              <% else %>
+                <%= link_to "Reject", reject_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+                <%= link_to "Accept", accept_cat_sighting_path(sighting),
+                  data: { turbo_method: :patch, turbo_confirm: "Are you sure?" },
+                  class: "btn btn-success text-white #{'disabled' if sighting.status == 'accepted'}" %>
               <% end %>
             </div>
+            <div class="card-footer text-body-secondary">
+              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
+            </div>
+          </div>
         <% end %>
+      </div>
 
-    <% end %>
+      <!-- Add Sighting Button for Cat Owner -->
+      <% if @cat.user == current_user %>
+        <div class="text-center my-3">
+          <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
 
 <script>
+  function showPendingSightings() {
+    document.getElementById('pending-sightings').style.display = 'block';
+    document.getElementById('accepted-sightings').style.display = 'none';
+  }
+
+  function showAcceptedSightings() {
+    document.getElementById('pending-sightings').style.display = 'none';
+    document.getElementById('accepted-sightings').style.display = 'block';
+  }
+
   function confirmAndPatch(catId) {
     if (confirm("Has your cat been found?")) {
       fetch(`/cats/${catId}/found`, {
