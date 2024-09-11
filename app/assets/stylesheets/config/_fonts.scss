@@ -3,10 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hanunoo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
 
 // Define fonts for body and headers
-$body-font: "DM Sans", "Helvetica", "sans-serif";
-$headers-font: "DM Sans", "Helvetica", "sans-serif";
+$body-font: "Noto Sans", "Helvetica", "sans-serif";
+$headers-font: "Oswald", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
