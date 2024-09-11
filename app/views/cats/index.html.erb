@@ -44,7 +44,7 @@
   <!-- Sightings Section -->
   <div class="col-md-6">
     <% if @sightings.present? %>
-      <h2 class="text-center my-4"><strong>Sightings without profile in: <%= params[:query] %></strong></h2>
+      <h4 class="text-center m-4">Sightings without profile in: <%= params[:query] %></h4>
       <% @sightings.each do |sighting| %>
         <div class="card mb-3" style="min-height: 150px;">
           <div class="row g-0">
@@ -60,8 +60,8 @@
               </div>
               <div class="col-md-4">
                 <div class="card-body">
-                  <h4 class="card-title">Message:</h4>
-                  <p class="card-text"><small class="text-body-secondary">Last updated <%= time_ago_in_words(sighting.updated_at) %> ago</small></p>
+                  <h6 class="card-title"><i class="fa-solid fa-location-dot"></i> Last seen <%= time_ago_in_words(sighting.last_seen_at) %> around <%= sighting.address %>.</h6>
+                  <p class="card-text"><small class="text-body-secondary">Message: <%= sighting.description %></small></p>
                 </div>
               </div>
             <% else %>
