@@ -7,7 +7,7 @@ class Cat < ApplicationRecord
   after_validation :geocode_with_error_handling, if: :will_save_change_to_origin_address?
 
   include PgSearch::Model
-  pg_search_scope :search_by_city, against: :city, using: {
+  pg_search_scope :search_by_address, against: :origin_address, using: {
     tsearch: {
       prefix: true
     }

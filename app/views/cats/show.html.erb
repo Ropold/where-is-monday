@@ -61,7 +61,7 @@
       <!-- Pending Sightings -->
       <% if @cat.user == current_user %>
         <div id="pending-sightings">
-          <% @cat.sightings.where(status: 'pending').order(created_at: :desc).each do |sighting| %>
+          <% @cat.sightings.where(status: 'pending').order(last_seen_at: :desc).each do |sighting| %>
             <div class="card text-center mt-3">
               <div class="card-header">
                 <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
@@ -87,6 +87,7 @@
       <!-- Accepted Sightings -->
       <div id="accepted-sightings" style="display: none;">
         <% @cat.sightings.where(status: 'accepted').order(created_at: :desc).each do |sighting| %>
+
           <div class="card text-center mt-3">
             <div class="card-header">
               <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
