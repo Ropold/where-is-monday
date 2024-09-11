@@ -50,29 +50,28 @@
 
       <!-- Selection Mechanism -->
       <div class="sighting-toggle my-3">
+        <button class="btn btn-secondary" onclick="showAcceptedSightings()">Sightings</button>
         <% if @cat.user == current_user %>
           <button class="btn btn-primary" onclick="showPendingSightings()">Pending Sightings</button>
         <% end %>
-        <button class="btn btn-secondary" onclick="showAcceptedSightings()">Accepted Sightings</button>
+
       </div>
 
       <!-- Pending Sightings -->
       <% if @cat.user == current_user %>
-        <div id="pending-sightings">
-          <% @cat.sightings.where(status: 'pending').order(last_seen_at: :desc).each do |sighting| %>
+        <div id="pending-sightings" style="display: none;">
+          <% @cat.sightings.where(status: 'pending').each do |sighting| %>
             <div class="card text-center mt-3">
               <div class="card-header">
                 <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
               </div>
               <div class="card-body">
                 <h5 class="card-title"></h5>
+                <p><strong>Sighting by :</strong> <%= sighting.user.email %></p>
                 <p><strong>Message:</strong> <%= sighting.description %></p>
-                <% if sighting.user == current_user %>
-                  <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-                <% else %>
-                  <%= link_to "Reject", reject_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-                  <%= link_to "Accept", accept_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
-                <% end %>
+
+                <%= link_to "Reject", reject_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
+                <%= link_to "Accept", accept_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
               </div>
               <div class="card-footer text-body-secondary">
                 Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
@@ -83,24 +82,22 @@
       <% end %>
 
       <!-- Accepted Sightings -->
+
       <div id="accepted-sightings" style="display: none;">
         <% @cat.sightings.where(status: 'accepted').order(last_seen_at: :desc).each do |sighting| %>
-
+        
           <div class="card text-center mt-3">
             <div class="card-header">
               <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
             </div>
             <div class="card-body">
               <h5 class="card-title"></h5>
+              <p><strong>Sighting by :</strong> <%= sighting.user.email %></p>
               <p><strong>Message:</strong> <%= sighting.description %></p>
               <% if sighting.user == current_user %>
                 <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-              <% else %>
-                <%= link_to "Reject", reject_cat_sighting_path(sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-                <%= link_to "Accept", accept_cat_sighting_path(sighting),
-                  data: { turbo_method: :patch, turbo_confirm: "Are you sure?" },
-                  class: "btn btn-success text-white #{'disabled' if sighting.status == 'accepted'}" %>
               <% end %>
+
             </div>
             <div class="card-footer text-body-secondary">
               Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
@@ -130,6 +127,8 @@
     document.getElementById('accepted-sightings').style.display = 'block';
   }
 
+
+// cat found code
   function confirmAndPatch(catId) {
     if (confirm("Has your cat been found?")) {
       fetch(`/cats/${catId}/found`, {

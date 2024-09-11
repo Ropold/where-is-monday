@@ -1,25 +1,38 @@
 class SightingsController < ApplicationController
   before_action :set_sighting, only: [:show, :edit, :update, :destroy, :accept, :reject]
-  before_action :set_cat, only: [:new, :create]
+  before_action :set_cat, only: [:new]
 
   def new
     @sighting = Sighting.new
   end
 
   def create
-    @sighting = @cat.sightings.build(sighting_params)
+    @sighting = Sighting.new(sighting_params)
     @sighting.user = current_user
 
-    if @cat.user == current_user
-      @sighting.status = 'accepted'
-    else
-      @sighting.status = 'pending'
-    end
+    if params[:cat_id].present?
+      @cat = Cat.find(params[:cat_id])
+      @sighting.cat = @cat
+      if @cat.user == current_user
+        @sighting.status = 'accepted'
+      else
+        @sighting.status = 'pending'
+      end
 
-    if @sighting.save
-      redirect_to cat_path(@cat), notice: 'Sighting was successfully created.'
+      # we save with cat_id
+      if @sighting.save
+        redirect_to cat_path(@cat), notice: 'Sighting was successfully created.'
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+
+      # we save with no cat_id
+      if @sighting.save
+        redirect_to sightings_step1_path, notice: 'Sighting was successfully created. Thanks for helping!'
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
@@ -43,13 +56,27 @@ class SightingsController < ApplicationController
   end
 
   def accept
+    @sighting = Sighting.find(params[:id])
     @sighting.update(status: 'accepted')
     redirect_to @sighting.cat, notice: 'Sighting was successfully accepted.'
   end
 
   def reject
+    @sighting = Sighting.find(params[:id])
     @sighting.update(status: 'rejected')
     redirect_to @sighting.cat, notice: 'Sighting was successfully rejected.'
+  end
+
+  def add_sighting
+    @sighting = Sighting.new
+  end
+
+  def step1
+    if params[:query].present?
+      @cats = Cat.search_by_city(params[:query])
+    else
+      @cats = Cat.where(found: false)
+    end
   end
 
   private
