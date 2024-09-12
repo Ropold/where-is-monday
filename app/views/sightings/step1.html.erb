@@ -24,25 +24,29 @@
 
     <div class="grid">
       <% @cats.each do |cat| %>
-        <div class="card box mb-4">
+        <div class="box card mb-4" style="position: relative;">
           <!-- Cat Info inside each card -->
+          <div class="card-cat-infos">
             <% if cat.photo.attached? %>
-              <div class="img-container" style="background-image: url('<%= cl_image_path cat.photo.key %>');"></div>
+              <%= cl_image_tag cat.photo.key, class: "card-img-top img-fluid" %>
             <% end %>
-
             <div class="card-body">
-              <h4 class="card-title py-2"><strong><%= cat.name %></strong></h4>
+              <h2 class="card-title py-2"><strong><%= cat.name %></strong></h2>
               <p><strong><%= "#{cat.name} was lost at: " %></strong></p>
               <p><%= cat.origin_address %></p>
               <% if cat.sightings.any? %>
-                <p><strong><%= "Last seen at:" %></strong></p>
-                <% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %>
-                <p><%= last_sighting.address if last_sighting %></p>
-                <p><%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></p>
-                <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info" %>
+              <p><strong><%= "Last seen at:" %></strong></p>
+              <% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %>
+              <p><%= last_sighting.address if last_sighting %></p>
+              <p><%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></p>
+
               <% else %>
                 <p><strong>No sightings available yet.</strong></p>
               <% end %>
+              <p><strong>Description:</strong> <%= cat.description %></p>
+              <p class="d-flex justify-content-end" style="position: absolute; bottom: 10px; right: 10px;">
+                  <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn-main my-1 ms-3 me-3" %>
+            </div>
           </div>
         </div>
       <% end %>
