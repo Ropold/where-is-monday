@@ -1,37 +1,37 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <div class="d-flex">
       <%= link_to root_path, class: "navbar-brand" do %>
-      <div class="d-flex">
-        <%= image_tag "https://cdn.pixabay.com/photo/2019/09/14/09/44/cat-4475583_960_720.png"  %>
+        <div class="d-flex align-items-center">
+          <%= image_tag "new_logo.png", style: "width: 90px; height: auto;" %>
 
-      </div>
+        </div>
       <% end %>
-    </div>
-
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto pt-2">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+
+          <li class="nav-item me-3">
+            <%= link_to new_cat_path, class: "nav-link" do %>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">I lost my cat</h6>
+            <% end %>
           </li>
-          <li class="nav-item active">
-            <%= link_to "MyCat", cat_path(current_user.cats.last), class: "nav-link" %>
+          <li class="nav-item me-3">
+            <%= link_to sightings_step1_path, class: "nav-link" do %>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">I saw a Cat</h6>
+            <% end %>
           </li>
-          <li class="nav-item active">
-            <%= link_to "AddLostCat", new_cat_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "AddSighting", sightings_step1_path, class: "nav-link" %>
+            <li class="nav-item me-3">
+            <%= link_to cat_path(current_user.cats.last), class: "nav-link" do %>
+              <h6 class="border-start border-warning ps-1 fw-bold text-dark">My Cat</h6>
+            <% end %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://cdn.pixabay.com/photo/2023/07/30/00/12/cat-8157889_960_720.png", class: "avatar", alt: "dropdown menu" %>
+            <%= image_tag "https://cdn.pixabay.com/photo/2023/07/30/00/12/cat-8157889_960_720.png", class: "avatar border-2 border border-warning", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Edit your Account", edit_user_registration_path, class: "dropdown-item" %>

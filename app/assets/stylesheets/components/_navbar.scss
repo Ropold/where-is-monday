@@ -13,7 +13,11 @@
 }
 
 .main-font {
-  font-family: "Squada One", sans-serif;
-  font-weight: 400;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
   font-style: normal;
+}
+
+.nav-item:hover {
+  scale: 1.1;
 }
