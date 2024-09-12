@@ -1,4 +1,4 @@
-<div class="container-fluid bg-white ps-4">
+<div class="container-fluid">
   <div class="row">
 
     <div class="map col-md-6 sticky-top border border-dark-subtle"
@@ -7,13 +7,15 @@
       data-map-api-key-value="<%= ENV["MAPBOX_API_KEY"] %>">
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 bg-white">
       <div class="cat-show-card row my-3">
         <div class="cat-details col-md-5">
-          <h4 class="<%= @cat.found ? "text-success" : "text-danger" %>"><%= @cat.found ? "Cat already found!" : "This cat has not been found yet." %></h4>
-          <h5><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></h5>
-          <h5><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h5>
-          <h6><%= @cat.description %></h6>
+          <h4><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h4>
+          <p><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></p>
+          <p class="<%= @cat.found ? "text-success" : "text-warning" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
+          <br>
+          <h5>Cat description:</h5>
+          <p><%= @cat.description %></p>
           <p><strong>Race:</strong> <%= @cat.race %></p>
           <p><strong>Eye color:</strong> <%= @cat.eye_color %></p>
           <p><strong>Hair color:</strong> <%= @cat.color %></p>
@@ -49,13 +51,21 @@
       </div>
 
       <!-- Selection Mechanism -->
-      <div class="sighting-toggle my-3">
-        <button class="btn btn-secondary" onclick="showAcceptedSightings()">Sightings</button>
+      <div class="sighting-toggle my-4">
+      <ul class="list-inline tabs-underlined">
+        <li>
+          <a href="#" id="accepted-sightings-tab" class="tab-underlined active" onclick="showAcceptedSightings()">Sightings</a>
+        </li>
         <% if @cat.user == current_user %>
-          <button class="btn btn-primary" onclick="showPendingSightings()">Pending Sightings</button>
+          <li>
+            <a href="#" id="pending-sightings-tab" class="tab-underlined" onclick="showPendingSightings()">Pending Sightings</a>
+          </li>
         <% end %>
+      </ul>
+    </div>
 
-      </div>
+
+
 
       <!-- Pending Sightings -->
       <% if @cat.user == current_user %>
@@ -120,16 +130,22 @@
 </div>
 
 <script>
-  function showPendingSightings() {
-    document.getElementById('pending-sightings').style.display = 'block';
-    document.getElementById('accepted-sightings').style.display = 'none';
-  }
 
-  function showAcceptedSightings() {
-    document.getElementById('pending-sightings').style.display = 'none';
-    document.getElementById('accepted-sightings').style.display = 'block';
-  }
+function showPendingSightings() {
+  event.preventDefault();
+  document.getElementById('pending-sightings').style.display = 'block';
+  document.getElementById('accepted-sightings').style.display = 'none';
+  document.getElementById('pending-sightings-tab').classList.add('active');
+  document.getElementById('accepted-sightings-tab').classList.remove('active');
+}
 
+function showAcceptedSightings() {
+  event.preventDefault();
+  document.getElementById('pending-sightings').style.display = 'none';
+  document.getElementById('accepted-sightings').style.display = 'block';
+  document.getElementById('accepted-sightings-tab').classList.add('active');
+  document.getElementById('pending-sightings-tab').classList.remove('active');
+}
 
 // cat found code
   function confirmAndPatch(catId) {
