@@ -312,37 +312,37 @@ luna1.photo.attach(
   content_type: 'image/jpeg'
 )
 
-luna2 = Sighting.create!(
-  cat: cat1,
-  user_id: user1.id,
-  address: "Neumarkt 1, Köln",  # Nimm die Adresse und entferne sie aus dem Array
-  city: "Köln",
-  last_seen_at: Time.now - rand(7..9).hours,
-  description: "Near Neumarkt, Luna seemed weak and was moving very slowly.",
-  status: "pending"
-)
+# luna2 = Sighting.create!(
+#   cat: cat1,
+#   user_id: user1.id,
+#   address: "Neumarkt 1, Köln",  # Nimm die Adresse und entferne sie aus dem Array
+#   city: "Köln",
+#   last_seen_at: Time.now - rand(7..9).hours,
+#   description: "Near Neumarkt, Luna seemed weak and was moving very slowly.",
+#   status: "pending"
+# )
 
-luna2.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/pending2_grf1iu.jpg'),
-  filename: 'luna2.jpg',
-  content_type: 'image/jpeg'
-)
+# luna2.photo.attach(
+#   io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/pending2_grf1iu.jpg'),
+#   filename: 'luna2.jpg',
+#   content_type: 'image/jpeg'
+# )
 
-luna3 = Sighting.create!(
-  cat: cat1,
-  user_id: user1.id,
-  address: "Hansaring, Köln",  # Nimm die Adresse und entferne sie aus dem Array
-  city: "Köln",
-  last_seen_at: Time.now - rand(10..12).hours,
-  description: "Near Hansaring, Luna was sitting on the ground.",
-  status: "pending"
-)
+# luna3 = Sighting.create!(
+#   cat: cat1,
+#   user_id: user1.id,
+#   address: "Hansaring, Köln",  # Nimm die Adresse und entferne sie aus dem Array
+#   city: "Köln",
+#   last_seen_at: Time.now - rand(10..12).hours,
+#   description: "Near Hansaring, Luna was sitting on the ground.",
+#   status: "pending"
+# )
 
-luna3.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136295/pending3_ocjthr.jpg'),
-  filename: 'luna3.jpg',
-  content_type: 'image/jpeg'
-)
+# luna3.photo.attach(
+#   io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136295/pending3_ocjthr.jpg'),
+#   filename: 'luna3.jpg',
+#   content_type: 'image/jpeg'
+# )
 
 luna4 = Sighting.create!(
   cat: cat1,
