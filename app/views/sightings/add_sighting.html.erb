@@ -1,20 +1,24 @@
-<div class="sighting-form-container">
+<div class="cat-form-container mt-4 pt-4">
+  <h1 style="text-align: center; color: gray;">Add Sighting</h1>
   <%= simple_form_for @sighting, url: create_sighting_path do |form| %>
-    <div class="sighting-form">
+
+    <div class="cat-form">
       <%= form.label :address, "Address", class: "form-label" %>
-      <%= form.text_field :address, class: "form-input" %>
+      <%= form.text_field :address, class: "form-input", placeholder: "e.g., 123 Main St" %>
       <%= form.label :description, "Description", class: "form-label" %>
-      <%= form.text_area :description, rows: 4, class: "form-textarea" %>
+      <%= form.text_area :description, class: "form-textarea", placeholder: "e.g., A friendly Siamese cat with a blue collar" %>
       <%= form.label :last_seen_at, "Last Seen At", class: "form-label" %>
-      <%= form.datetime_select :last_seen_at, class: "form-input" %>
+      <div>
+        <%= form.label :last_seen_at, "Date and Time of Last Sighting", class: "form-label" %>
+        <%= form.datetime_local_field :last_seen_at, class: "form-input", placeholder: "Select date and time" %>
+        <small class="form-hint">Provide the exact date and time the sighting occurred.</small>
+      </div>
       <%= form.hidden_field :user_id, value: current_user.id %>
-      <%= form.input :photo, as: :file %>
+      <%= form.input :photo, as: :file, class: "form-control-file" %>
     </div>
 
-    <div class="sighting-form">
-      <%= form.submit "Create Sighting", class: "form-submit" %>
+    <div class="cat-form">
+      <%= form.submit "Create Sighting", class: "form-submit btn btn-info rounded-pill mt-3" %>
     </div>
   <% end %>
 </div>
-
-<%= link_to 'Back', sightings_step1_path, class: "back-link" %>
