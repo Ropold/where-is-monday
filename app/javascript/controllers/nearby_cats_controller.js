@@ -94,7 +94,7 @@ export default class extends Controller {
                   <div class="overlay-text card-cat-label">Recently Lost</div>
                   <div class="card-body">
                     <h3 class="card-title">${cat.name}</h3>
-                    <p class="card-text">${cat.description}</p>
+                    <p class="card-text">${cat.description.slice(0,50)} ...</p>
                     <a href="/cats/${cat.id}" class="btn custom-btn">
                       <i class="fa-solid fa-paw orange-paw"></i>
                       <span class="details-text orange-paw">Details</span>
@@ -112,7 +112,7 @@ export default class extends Controller {
                   <div class="overlay-text card-cat-label">Recently Lost</div>
                   <div class="card-body">
                     <h3 class="card-title">${cat.name}</h3>
-                    <p class="card-text">${cat.description}</p>
+                    <p class="card-text">${cat.description.slice(0,50)} ...</p>
                     <a href="/cats/${cat.id}" class="btn custom-btn">
                       <i class="fa-solid fa-paw orange-paw"></i>
                       <span class="details-text orange-paw">Details</span>
