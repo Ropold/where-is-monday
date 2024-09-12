@@ -6,7 +6,7 @@ class CatsController < ApplicationController
     @sightings = Sighting.geocoded.where(cat_id: nil)
     if params[:query].present?
       @sightings = @sightings.search_by_address(params[:query]).sort_by { |sighting| sighting.last_seen_at }.reverse
-      @cats = Cat.search_by_address(params[:query])
+      @cats = @cats.search_by_address(params[:query])
     end
   end
 

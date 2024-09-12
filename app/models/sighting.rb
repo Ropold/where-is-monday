@@ -15,4 +15,3 @@ class Sighting < ApplicationRecord
     }
   }
 end
-

@@ -31,8 +31,10 @@
               <p><%= cat.origin_address %></p>
               <% if cat.sightings.any? %>
               <p><strong><%= "Last seen at:" %></strong></p>
-              <p><%= cat.sightings.last.address %></p>
-              <p><%= cat.sightings.last.last_seen_at %></p>
+              <% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %>
+              <p><%= last_sighting.address if last_sighting %></p>
+              <p><%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></p>
+
               <% else %>
                 <p><strong>No sightings available yet.</strong></p>
               <% end %>
