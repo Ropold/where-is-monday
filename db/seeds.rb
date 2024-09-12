@@ -27,7 +27,7 @@ cat1 = Cat.create(
   created_at: Time.now - rand(15..20).days
 )
 cat1.photo.attach(
-  io: URI.open('https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_960_720.jpg'),
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/luna-profile_n5hw0a.jpg'),
   filename: 'photo.jpg',
   content_type: 'image/jpeg'
 )
@@ -297,26 +297,54 @@ leverkusen_addresses = [
 
 puts "Created 5 sightings for Luna-Cat1 (user3 = john@lost.com) in Köln with user2.id & user1.id"
 
-Sighting.create!(
+luna1 = Sighting.create!(
   cat: cat1,
   user_id: user2.id,
   address: "Domkloster 4, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
   city: "Köln",
-  last_seen_at: Time.now - 1.days,
+  last_seen_at: Time.now - rand(4..6).hours,
   description: "I think I spotted Luna resting near the cathedral, looking a bit tired.",
   status: "pending"
 )
+luna1.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/pending1_ktkske.jpg'),
+  filename: 'luna1.jpg',
+  content_type: 'image/jpeg'
+)
 
-Sighting.create!(
+luna2 = Sighting.create!(
   cat: cat1,
   user_id: user1.id,
   address: "Neumarkt 1, Köln",  # Nimm die Adresse und entferne sie aus dem Array
   city: "Köln",
-  last_seen_at: Time.now - 2.days,
+  last_seen_at: Time.now - rand(7..9).hours,
   description: "Near Neumarkt, Luna seemed weak and was moving very slowly.",
   status: "pending"
 )
-Sighting.create!(
+
+luna2.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/pending2_grf1iu.jpg'),
+  filename: 'luna2.jpg',
+  content_type: 'image/jpeg'
+)
+
+luna3 = Sighting.create!(
+  cat: cat1,
+  user_id: user1.id,
+  address: "Hansaring, Köln",  # Nimm die Adresse und entferne sie aus dem Array
+  city: "Köln",
+  last_seen_at: Time.now - rand(10..12).hours,
+  description: "Near Hansaring, Luna was sitting on the ground.",
+  status: "pending"
+)
+
+luna3.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136295/pending3_ocjthr.jpg'),
+  filename: 'luna3.jpg',
+  content_type: 'image/jpeg'
+)
+
+luna4 = Sighting.create!(
   cat: cat1,
   user_id: user2.id,
   address: "Heumarkt 50, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
@@ -325,7 +353,14 @@ Sighting.create!(
   description: "Pretty sure I saw Luna wandering near Heumarkt, her fur a bit dirty and unkempt.",
   status: "accepted"
 )
-Sighting.create!(
+
+luna4.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted1_rorl0x.jpg'),
+  filename: 'luna4.jpg',
+  content_type: 'image/jpeg'
+)
+
+luna5 = Sighting.create!(
   cat: cat1,
   user_id: user1.id,
   address: "Rudolfplatz 5, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
@@ -334,7 +369,13 @@ Sighting.create!(
   description: "Luna was likely seen hiding at Rudolfplatz, looking anxious and weary.",
   status: "accepted"
 )
-Sighting.create!(
+luna5.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted2_fugaea.jpg'),
+  filename: 'luna5.jpg',
+  content_type: 'image/jpeg'
+)
+
+luna6 = Sighting.create!(
   cat: cat1,
   user_id: user1.id,
   address: "Friesenstraße 15, Köln" ,  # Nimm die Adresse und entferne sie aus dem Array
@@ -342,6 +383,12 @@ Sighting.create!(
   last_seen_at: Time.now - 10.days,
   description: "I might have spotted Luna on Friesenstraße, looking calm and relaxed",
   status: "accepted"
+)
+
+luna6.photo.attach(
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted3_be3a0c.jpg'),
+  filename: 'luna6.jpg',
+  content_type: 'image/jpeg'
 )
 
 
