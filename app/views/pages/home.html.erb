@@ -4,15 +4,13 @@
     <p>Helping you reunite with what matters most.</p>
 
     <%= form_with url: cats_path, method: :get, local: true, class: "search-form mt-4" do %>
-
-
-    <div class="form-group">
-      <%= text_field_tag :query, params[:query], placeholder: "Enter your City or Street", class: "form-control w-50 d-inline-block align-middle" %>
-      <%= button_tag(type: "submit", class: "btn btn-dark d-inline-block align-middle ml-2 border") do %>
-        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-      <% end %>
-    </div>
-      <% end %>
+      <div class="form-group">
+        <%= text_field_tag :query, params[:query], placeholder: "Enter your City or Street", class: "form-control w-50 d-inline-block align-middle rounded-pill" %>
+        <%= button_tag(type: "submit", class: "align-middle ml-2 rounded-pill border-0 px-3 py-2  text-white bg-warning") do %>
+          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+        <% end %>
+      </div>
+    <% end %>
     </div>
   </div>
 </div>
