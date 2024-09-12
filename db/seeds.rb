@@ -14,7 +14,7 @@ puts "Creating 4 Cats lost and 3 Cats found:"
 
 cat1 = Cat.create(
   name: "Luna",
-  description: "A playful kitten who loves to chase shadows.",
+  description: "A playful and curious kitten who loves chasing shadows and exploring. Full of energy, they bring joy with their antics and balance it with sweet moments of cuddling.",
   race: "British Shorthair",
   eye_color: "Green",
   color: "Gray",
@@ -114,7 +114,7 @@ cat6 = Cat.create(
   eye_color: "Green",
   color: "Brown Spotted",
   fur: "Short",
-  found: true,
+  found: false,
   user_id: user1.id,
   city: "Köln",
   origin_address: "Domkloster 4, Köln, Deutschland",
@@ -133,7 +133,7 @@ cat7 = Cat.create(
   eye_color: "Blue",
   color: "Cream with Dark Points",
   fur: "Short",
-  found: true,
+  found: false,
   user_id: user2.id,
   city: "Köln",
   origin_address: "Heumarkt 50, Köln, Deutschland",
@@ -399,6 +399,42 @@ images = [
 
 cities.each do |city, addresses|
 
+  cat_sighting_descriptions = [
+  "Spotted a cat lounging on the windowsill, enjoying the morning sun.",
+  "Saw a playful kitten chasing its tail in the backyard garden.",
+  "Observed a cat calmly resting on the fence, watching the neighborhood activities.",
+  "Noticed a stray cat hiding under a bench, seeking shelter from the rain.",
+  "A sleek gray cat was seen darting across the street early this morning.",
+  "Found a cat napping peacefully on a pile of leaves in the park.",
+  "Witnessed a fluffy white cat curiously exploring the flower beds in the yard.",
+  "Saw a cat perched on a rooftop, scanning the surroundings with keen eyes.",
+  "Spotted a cat grooming itself on the porch, looking clean and content.",
+  "Noticed a cat playfully pouncing on fallen leaves in the autumn breeze.",
+  "Observed a tabby cat lounging on a car hood, enjoying the warmth.",
+  "Saw a cat wandering near the playground, cautiously approaching children.",
+  "Found a calico cat curled up in a cozy corner of the garden shed.",
+  "Witnessed a cat racing through the alleyway, chasing an elusive object.",
+  "Spotted a cat perched on a high tree branch, surveying its territory.",
+  "Saw a cat eating from a bowl left out on the front steps.",
+  "Noticed a cat darting between parked cars, exploring its urban surroundings.",
+  "Found a cat nestled in a basket of fresh laundry, looking snug.",
+  "Observed a cat sitting on a windowsill, watching raindrops fall outside.",
+  "Saw a cat playing with a toy mouse in the living room.",
+  "Noticed a cat calmly strolling down the sidewalk, completely at ease.",
+  "Found a cat hiding in the bushes, peeking out with curious eyes.",
+  "Spotted a cat resting in a sunbeam on a comfy chair.",
+  "Saw a cat darting into an open garage, searching for a hiding spot.",
+  "Observed a cat sitting on the garden wall, enjoying the sunset view.",
+  "Found a cat stretching lazily on a warm stone path.",
+  "Witnessed a cat trotting along the park path, tail held high.",
+  "Spotted a cat leaping gracefully onto a high fence, then disappearing over it.",
+  "Noticed a cat napping in a patch of sunlight on the grass.",
+  "Saw a cat watching birds from the safety of a bush.",
+  "Found a cat pawing at the edge of a fountain, fascinated by the water.",
+  "Observed a cat lying flat on the ground, soaking in the afternoon sun.",
+  "Spotted a cat peeking out from behind a garden gnome, curious and alert."
+]
+
   # Erstelle 2 Sichtungen mit Bild
   2.times do
     image_url = images.shift
@@ -408,7 +444,7 @@ cities.each do |city, addresses|
       address: addresses.shift,
       city: city,
       last_seen_at: Time.now - rand(1..14).days,
-      description: "General sighting in #{city}",
+      description: cat_sighting_descriptions.shift,
       status: "accepted",
       photo: {
         io: URI.open(image_url),
@@ -425,7 +461,7 @@ cities.each do |city, addresses|
       address: addresses.shift,
       city: city,
       last_seen_at: Time.now - rand(1..14).days,
-      description: "General sighting in #{city}",
+      description: cat_sighting_descriptions.shift,
       status: "accepted"
     )
   end
