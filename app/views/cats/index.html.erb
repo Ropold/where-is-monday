@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-center mb-4">
   <%= form_with url: cats_path, method: :get, local: true, class: "search-form mt-4 d-flex align-items-center" do %>
     <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control w-auto rounded-pill" %>
-    <%= submit_tag "Search", class: "btn btn-info ms-2 rounded-pill" %>
+    <%= button_tag(type: "submit", class: "align-middle ml-2 rounded-pill border-0 px-3 py-2  text-white bg-warning") do %>
+      <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <% end %>
   <% end %>
 </div>
 
