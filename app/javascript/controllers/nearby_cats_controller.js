@@ -77,7 +77,7 @@ export default class extends Controller {
         // Title element
         const title = `
           <div class="text-center my-5">
-            <h4 style="font-weight: bold; font-size: 40px;">Recently Lost Cats:</h4>
+            <h3>Recently lost cats</h3>
           </div>
         `;
         this.containerTarget.insertAdjacentHTML('beforeend', title);

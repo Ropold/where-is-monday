@@ -1,23 +1,26 @@
 <div class="container">
   <!-- Title and Add Sighting Button -->
-  <div class="d-flex justify-content-center align-items-center mb-4">
-    <h1 style="color: gray;">Where did the sighting occur?</h1>
-    <%= link_to "Add Sighting", add_sighting_path, class: "btn btn-info my-2 ms-3 rounded-pill" %>
+  <div class="d-flex justify-content-center align-items-center my-4">
+    <h4>Where did the sighting occur?</h4>
   </div>
 
   <!-- Search Form -->
   <div class="d-flex justify-content-center">
-    <%= form_with url: sightings_step1_path, method: :get, local: true, class: "search-form mt-4 d-flex align-items-center" do %>
+    <%= form_with url: sightings_step1_path, method: :get, local: true, class: "search-form mt-1 mb-3 d-flex align-items-center" do %>
       <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control form-control-lg w-auto rounded-pill" %>
       <%= button_tag(type: "submit", class: "align-middle ml-2 rounded-pill border-0 px-3 py-2  text-white bg-warning") do %>
         <i class="fa-solid fa-magnifying-glass fa-lg"></i>
       <% end %>
     <% end %>
   </div>
-
   <!-- Grid Layout for Cards -->
   <% if !@cats.empty? %>
-    <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
+  <div class="d-flex">
+    <h4 class="text-center my-2"> Lost cats in <%= params[:query]%></h4>
+    <div class="d-flex">
+      <p class= mb-1>You don't recognize the cat?<%= link_to "add sighting here", add_sighting_path, class: "btn-main my-2 ms-3" %></p>
+    </div>
+  </div>
 
     <div class="grid">
       <% @cats.each do |cat| %>
