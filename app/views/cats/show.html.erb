@@ -59,7 +59,7 @@
                 <% end %>
               </div>
             <% else %>
-              <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
+              <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn-main" %>
             <% end %>
 
           </div>
@@ -166,7 +166,7 @@
       <!-- Add Sighting Button for Cat Owner -->
       <% if @cat.user == current_user %>
         <div class="text-center my-3">
-          <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-primary" %>
+          <%= link_to "Add Sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn-main" %>
         </div>
       <% end %>
     </div>
