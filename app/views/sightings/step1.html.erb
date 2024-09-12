@@ -2,14 +2,16 @@
   <!-- Title and Add Sighting Button -->
   <div class="d-flex justify-content-center align-items-center mb-4">
     <h1 style="color: gray;">Where did the sighting occur?</h1>
-    <%= link_to "Add Sighting", add_sighting_path, class: "btn btn-info my-2 ms-3" %>
+    <%= link_to "Add Sighting", add_sighting_path, class: "btn btn-info my-2 ms-3 rounded-pill" %>
   </div>
 
   <!-- Search Form -->
   <div class="d-flex justify-content-center">
     <%= form_with url: sightings_step1_path, method: :get, local: true, class: "search-form mt-4 d-flex align-items-center" do %>
       <%= text_field_tag :query, params[:query], placeholder: "Enter city", class: "form-control form-control-lg w-auto rounded-pill" %>
-      <%= submit_tag "Search", class: "btn btn-info btn-lg ms-2 rounded-pill" %>
+      <%= button_tag(type: "submit", class: "align-middle ml-2 rounded-pill border-0 px-3 py-2  text-white bg-warning") do %>
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+      <% end %>
     <% end %>
   </div>
 
@@ -40,7 +42,7 @@
               <% end %>
               <p><strong>Description:</strong> <%= cat.description %></p>
               <p class="d-flex justify-content-end" style="position: absolute; bottom: 10px; right: 10px;">
-                <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info" %>
+                <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info rounded-pill" %>
               </p>
             </div>
           </div>
