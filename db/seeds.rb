@@ -5,10 +5,11 @@ Sighting.destroy_all
 User.destroy_all
 Cat.destroy_all
 
-puts "Creating 3 Users:"
+puts "Creating 4 Users:"
 user1 = User.create(email: "john@wayne.com", password: "1234567898")
 user2 = User.create(email: "john@wick.com", password: "1234567898")
 user3 = User.create(email: "john@lost.com", password: "1234567898")
+user4 = User.create(email: "john@bro.com", password: "1234567898")
 
 puts "Creating 4 Cats lost and 3 Cats found:"
 
@@ -133,7 +134,7 @@ cat7 = Cat.create(
   eye_color: "Blue",
   color: "Cream with Dark Points",
   fur: "Short",
-  found: false,
+  found: true,
   user_id: user2.id,
   city: "Köln",
   origin_address: "Heumarkt 50, Köln, Deutschland",
