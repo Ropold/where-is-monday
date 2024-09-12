@@ -94,7 +94,7 @@
             <div class="card-body row">
               <div class="col-md-4">
                 <% if sighting.photo.attached? %>
-                  <div class="img-sighting" style="background-image: url('<%= cl_image_path @cat.photo.key %>');">
+                  <div class="img-sighting" style="background-image: url('<%= cl_image_path sighting.photo.key %>');">
                   </div>
                 <% else %>
                 <div class="rounded-4 border p-2 h-100">
@@ -136,7 +136,7 @@
             <div class="card-body row">
               <div class="col-md-4">
                 <% if sighting.photo.attached? %>
-                  <div class="img-sighting" style="background-image: url('<%= cl_image_path @cat.photo.key %>');">
+                  <div class="img-sighting" style="background-image: url('<%= cl_image_path sighting.photo.key %>');">
                   </div>
                 <% else %>
                 <div class="rounded-4 border p-2 h-100">
@@ -151,7 +151,7 @@
                   <p><small><%= sighting.description %></small></p>
                 </div>
                 <div class="d-flex justify-content-end">
-                  <% if sighting.user == current_user %>
+                  <% if sighting.user == current_user || @cat.user == current_user %>
                     <%= link_to sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-2" do %>
                       <i class="fa-solid fa-trash"></i>
                     <% end %>
