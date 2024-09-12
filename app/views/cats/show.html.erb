@@ -9,39 +9,52 @@
 
     <div class="col-md-6 bg-white">
       <div class="cat-show-card row my-3">
-        <div class="cat-details col-md-5">
+        <div class="cat-details col-md-6">
           <h4><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h4>
           <p><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></p>
-          <p class="<%= @cat.found ? "text-success" : "text-warning" %>"><%= @cat.found ? "Cat already found!" : "This cat has been not found yet." %></p>
           <br>
-          <h5>Cat description:</h5>
-          <p><%= @cat.description %></p>
-          <p><strong>Race:</strong> <%= @cat.race %></p>
-          <p><strong>Eye color:</strong> <%= @cat.eye_color %></p>
-          <p><strong>Hair color:</strong> <%= @cat.color %></p>
-          <p><strong>Fur type:</strong> <%= @cat.fur %></p>
-        </div>
+          <small>About</small>
+            <div class="rounded-4 border p-2">
+            <p><%= @cat.description %></p>
+            </div>
+              <br>
+            <h6><details>
+              <summary><small>More details</small></summary>
+              <br>
+            <div class="row">
+            <div class="col-md-6">
+              <p><strong>Race:</strong> <%= @cat.race %></p>
+              <p><strong>Eye color:</strong> <%= @cat.eye_color %></p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Hair color:</strong> <%= @cat.color %></p>
+              <p><strong>Fur type:</strong> <%= @cat.fur %></p>
+            </div>
+            </div>
+          </div>
 
-        <div class="col-md-7">
+        <div class="col-md-6">
           <% if @cat.photo.attached? %>
-            <div class="img-container">
-              <%= cl_image_tag @cat.photo.key, class: "rounded img-fluid hover-zoom" %>
+            <div class="img-container" style="background-image: url('<%= cl_image_path @cat.photo.key %>');">
+              <div class="card-cat-label fs-6 <%= @cat.found ? "found" : "not-found" %>">
+                <%= @cat.found ? "Cat already found!" : "Cat not found yet :(" %>
+              </div>
             </div>
           <% else %>
             <p>No picture available</p>
           <% end %>
-          <div class="card-actions d-flex flex-row-reverse pt-3">
+          <div class="card-actions d-flex justify-content-end pt-3">
 
             <% if @cat.user == current_user %>
-              <%= link_to cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-3" do %>
+              <%= link_to cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-4" do %>
                 <i class="fa-solid fa-trash"></i>
               <% end %>
-              <%= link_to edit_cat_path(@cat), class: "text-dark me-3" do %>
+              <%= link_to edit_cat_path(@cat), class: "text-dark me-4" do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
-              <button class="btn btn-success me-3" onclick="confirmAndPatch(<%= @cat.id %>)">
+              <a class="text-success me-3" onclick="confirmAndPatch(<%= @cat.id %>)">
                 <i class="fa-solid fa-house-flag"></i>
-              </button>
+              </a>
             <% else %>
               <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
             <% end %>
