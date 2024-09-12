@@ -34,7 +34,7 @@ cat1.photo.attach(
 
 cat2 = Cat.create(
   name: "Simba",
-  description: "A courageous and adventurous cat.",
+  description: "Simba is finally back in his Kingdom. I want to thank you all for your help and support. <3333",
   race: "Maine Coon",
   eye_color: "Hazel",
   color: "Brown",
@@ -53,7 +53,7 @@ cat2.photo.attach(
 
 cat3 = Cat.create(
   name: "Bella",
-  description: "A gentle cat with a soft purr.",
+  description: "She is a very scared cat. Please approach with care",
   race: "Sphynx",
   eye_color: "Blue",
   color: "Pink",
@@ -72,7 +72,7 @@ cat3.photo.attach(
 
 cat4 = Cat.create(
   name: "Leo",
-  description: "An energetic cat who enjoys climbing trees.",
+  description: "He is a very open cat. If you pet him he would stay with you. Please contact us!",
   race: "Abyssinian",
   eye_color: "Yellow",
   color: "Ruddy",
@@ -110,7 +110,7 @@ cat5.photo.attach(
 
 cat6 = Cat.create(
   name: "Milo",
-  description: "A curious cat who loves to explore new places.",
+  description: "He has a little scar on his right eye. Very shy, please approach with care.",
   race: "Bengal",
   eye_color: "Green",
   color: "Brown Spotted",
@@ -129,7 +129,7 @@ cat6.photo.attach(
 
 cat7 = Cat.create(
   name: "Nala",
-  description: "A playful cat who enjoys chasing toys and interacting with people.",
+  description: "Thank you very much all for your help. Nala has been found and is back scratching my sofa :DDD",
   race: "Siamese",
   eye_color: "Blue",
   color: "Cream with Dark Points",
@@ -171,7 +171,7 @@ cat8.photo.attach(
 
 cat9 = Cat.create(
   name: "Oscar",
-  description: "A playful kitten who loves to climb furniture.",
+  description: "Oscar i finally back home and i coudnt be happier. Thank you all for your help :)",
   race: "Persian",
   eye_color: "Blue",
   color: "White",
@@ -190,7 +190,7 @@ cat9.photo.attach(
 
 cat10 = Cat.create(
   name: "Tigger",
-  description: "Loves to play in the garden and chase birds.",
+  description: "A very dorky cat who is easily lured with food. If you see him please contact us!",
   race: "Maine Coon",
   eye_color: "Hazel",
   color: "Orange",
@@ -228,7 +228,7 @@ cat11.photo.attach(
 
 cat12 = Cat.create(
   name: "Loki",
-  description: "Very clever, loves to figure out puzzles.",
+  description: "My daughter is so happy that her best friend is back home. Thank your all from the bottom of my heart.",
   race: "Siamese",
   eye_color: "Blue",
   color: "Cream",
