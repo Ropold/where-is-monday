@@ -12,11 +12,12 @@
         <div class="cat-details col-md-6">
           <h4><%= @cat.name %> was lost <%= time_ago_in_words(@cat.created_at) %> ago.</h4>
           <p><i class="fa-solid fa-house me-2"></i><%= @cat.origin_address %></p>
-          <br>
+          <p><i class="fa-solid fa-envelope me-2"></i><%= @cat.user.email %></p>
+          <p class="mb-2"><i class="fa-solid fa-phone me-2"></i>+49 1873 81327</p>
           <small>About</small>
-            <div class="rounded-4 border p-2">
+          <div class="rounded-4 border p-2">
             <p><%= @cat.description %></p>
-            </div>
+          </div>
               <br>
             <h6><details>
               <summary><small>More details</small></summary>
@@ -46,15 +47,17 @@
           <div class="card-actions d-flex justify-content-end pt-3">
 
             <% if @cat.user == current_user %>
-              <%= link_to cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-4" do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-              <%= link_to edit_cat_path(@cat), class: "text-dark me-4" do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-              <% end %>
-              <a class="text-success me-3" onclick="confirmAndPatch(<%= @cat.id %>)">
-                <i class="fa-solid fa-house-flag"></i>
-              </a>
+              <div class="d-flex align-items-center me-3">
+                <a class="text-success me-3" onclick="confirmAndPatch(<%= @cat.id %>)" title="Mark as Found">
+                  <i class="fa-solid fa-house-flag fa-lg"></i>
+                </a>
+                <%= link_to edit_cat_path(@cat), class: "text-dark me-3", title: "Edit Cat Details" do %>
+                  <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <% end %>
+                <%= link_to cat_path(@cat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger", title: "Delete Cat" do %>
+                  <i class="fa-solid fa-trash fa-lg"></i>
+                <% end %>
+              </div>
             <% else %>
               <%= link_to "Add your sighting", new_cat_sighting_path(cat_id: @cat.id), class: "btn btn-secondary" %>
             <% end %>
@@ -84,22 +87,39 @@
       <% if @cat.user == current_user %>
         <div id="pending-sightings" style="display: none;">
           <% @cat.sightings.where(status: 'pending').each do |sighting| %>
-            <div class="card text-center mt-3">
-              <div class="card-header">
-                <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p><strong>Sighting by :</strong> <%= sighting.user.email %></p>
-                <p><strong>Message:</strong> <%= sighting.description %></p>
-
-                <%= link_to "Reject", reject_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-warning text-white" %>
-                <%= link_to "Accept", accept_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "btn btn-success text-white" %>
-              </div>
-              <div class="card-footer text-body-secondary">
-                Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
-              </div>
+        <div class="card mt-3 bg-white rounded-5">
+            <div class="card-header bg-light rounded-top-5 text-body-secondary text-center">
+              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago by <small class="fst-italic"><%= sighting.user.email %></small>
             </div>
+            <div class="card-body row">
+              <div class="col-md-4">
+                <% if sighting.photo.attached? %>
+                  <div class="img-sighting" style="background-image: url('<%= cl_image_path @cat.photo.key %>');">
+                  </div>
+                <% else %>
+                <div class="rounded-4 border p-2 h-100">
+                  <p>No picture available</p>
+                </div>
+                <% end %>
+              </div>
+              <div class="col-md-8">
+                <h6 class="card-title"> <i class="fa-solid fa-location-dot"></i> Last seen at <%= sighting.address %></h6>
+                <small class="fw-semibold">Message</small>
+                <div class="fst-italic">
+                  <p><small><%= sighting.description %></small></p>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <%= link_to accept_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "text-success border py-2 px-3 rounded-start-4" do %>
+                    <i class="fa-solid fa-check"></i>
+                    <% end %>
+                 	<%= link_to reject_cat_sighting_path(@cat, sighting), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" }, class: "text-danger border py-2 px-3 rounded-end-4" do %>
+                      <i class="fa-solid fa-xmark"></i>
+                    <% end %>
+                </div>
+              </div>
+
+            </div>
+          </div>
           <% end %>
         </div>
       <% end %>
@@ -109,24 +129,35 @@
       <div id="accepted-sightings">
         <% @cat.sightings.where(status: 'accepted').order(last_seen_at: :desc).each do |sighting| %>
 
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <h4 class="card-title mb-0">Last seen at <%= sighting.address %></h4>
+          <div class="card mt-3 bg-white rounded-5">
+            <div class="card-header bg-light rounded-top-5 text-body-secondary text-center">
+              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago by <small class="fst-italic"><%= sighting.user.email %></small>
             </div>
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p><strong>Sighting by :</strong> <%= sighting.user.email %></p>
-              <p><strong>Message:</strong> <%= sighting.description %></p>
-              <% if sighting.user == current_user %>
-                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-              <% end %>
-              <% if @cat.user == current_user %>
-                <%= link_to "Delete", sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
-              <% end %>
-
-            </div>
-            <div class="card-footer text-body-secondary">
-              Posted <%= time_ago_in_words(sighting.last_seen_at) %> ago.
+            <div class="card-body row">
+              <div class="col-md-4">
+                <% if sighting.photo.attached? %>
+                  <div class="img-sighting" style="background-image: url('<%= cl_image_path @cat.photo.key %>');">
+                  </div>
+                <% else %>
+                <div class="rounded-4 border p-2 h-100">
+                  <p>No picture available</p>
+                </div>
+                <% end %>
+              </div>
+              <div class="col-md-8">
+                <h6 class="card-title"> <i class="fa-solid fa-location-dot"></i> Last seen at <%= sighting.address %></h6>
+                <small class="fw-semibold">Message</small>
+                <div class="fst-italic">
+                  <p><small><%= sighting.description %></small></p>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <% if sighting.user == current_user %>
+                    <%= link_to sighting_path(sighting), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger me-2" do %>
+                      <i class="fa-solid fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         <% end %>
