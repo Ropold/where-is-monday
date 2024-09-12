@@ -244,7 +244,6 @@ cat12.photo.attach(
   content_type: 'image/jpeg'
 )
 
-
 koeln_addresses = [
   "Domkloster 4, Köln", "Neumarkt 1, Köln", "Rudolfplatz 5, Köln", "Heinrich-Böll-Platz, Köln",
   "Hohenzollernring 22, Köln", "Aachener Straße 125, Köln", "Zülpicher Straße 29, Köln", "Venloer Straße 234, Köln",
