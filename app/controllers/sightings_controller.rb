@@ -18,7 +18,6 @@ class SightingsController < ApplicationController
       else
         @sighting.status = 'pending'
       end
-
       # we save with cat_id
       if @sighting.save
         redirect_to cat_path(@cat), notice: 'Sighting was successfully created.'
@@ -73,9 +72,9 @@ class SightingsController < ApplicationController
 
   def step1
     if params[:query].present?
-      @cats = Cat.search_by_address(params[:query]).where(found: false)
+      @cats = Cat.search_by_address(params[:query]).where(found: false).order(created_at: :desc)
     else
-      @cats = Cat.where(found: false)
+      @cats = Cat.where(found: false).order(created_at: :desc)
     end
   end
 

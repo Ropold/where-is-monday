@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
-              <p class="card-text"><%= cat.description %></p>
+              <p class="card-text"><%= cat.description[0..50] %> ... </p>
               <%= link_to cat_path(cat), class: "btn custom-btn" do %>
                 <i class="fa-solid fa-paw orange-paw"></i>
                 <span class="details-text orange-paw">Details</span>
@@ -56,7 +56,7 @@
             </div>
             <div class="card-body">
               <h3 class="card-title"><%= cat.name %></h3>
-              <p class="card-text"><%= cat.description %></p>
+              <p class="card-text"><%= cat.description[0..50] %> ...</p>
               <%= link_to cat_path(cat), class: "btn custom-btn" do %>
                 <i class="fa-solid fa-paw orange-paw"></i>
                 <span class="details-text orange-paw">Details</span>
