@@ -1,8 +1,7 @@
 <div class="container">
   <!-- Title and Add Sighting Button -->
-  <div class="d-flex justify-content-center align-items-center mb-4">
-    <h1 style="color: gray;">Where did the sighting occur?</h1>
-    <%= link_to "Add Sighting", add_sighting_path, class: "btn btn-info my-2 ms-3" %>
+  <div class="d-flex justify-content-center align-items-center my-4">
+    <h4>Where did the sighting occur?</h4>
   </div>
 
   <!-- Search Form -->
@@ -15,18 +14,28 @@
 
   <!-- Grid Layout for Cards -->
   <% if !@cats.empty? %>
-    <strong><h1 class="text-center my-4"><%= "Lost cats in : #{params[:query]}" %></h1></strong>
+
+  <div class="d-flex align-items-center">
+    <h4 class="my-2">Lost cats in <%= params[:query] %></h4>
+    <div class="d-flex align-items-center">
+      <p>If you didn't find the cat in this list, add a sighting here</p>
+      <%= link_to "Add Sighting", add_sighting_path, class: "btn btn-info" %>
+    </div>
+  </div>
+
+
+
 
     <div class="grid">
       <% @cats.each do |cat| %>
-        <div class="box card mb-4" style="position: relative;">
+        <div class="card box mb-4">
           <!-- Cat Info inside each card -->
-          <div class="card-cat-infos">
             <% if cat.photo.attached? %>
-              <%= cl_image_tag cat.photo.key, class: "card-img-top img-fluid" %>
+              <div class="img-container" style="background-image: url('<%= cl_image_path cat.photo.key %>');"></div>
             <% end %>
+
             <div class="card-body">
-              <h2 class="card-title py-2"><strong><%= cat.name %></strong></h2>
+              <h4 class="card-title py-2"><strong><%= cat.name %></strong></h4>
               <p><strong><%= "#{cat.name} was lost at: " %></strong></p>
               <p><%= cat.origin_address %></p>
               <% if cat.sightings.any? %>
@@ -34,15 +43,10 @@
               <% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %>
               <p><%= last_sighting.address if last_sighting %></p>
               <p><%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></p>
-
+              <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info" %>
               <% else %>
                 <p><strong>No sightings available yet.</strong></p>
               <% end %>
-              <p><strong>Description:</strong> <%= cat.description %></p>
-              <p class="d-flex justify-content-end" style="position: absolute; bottom: 10px; right: 10px;">
-                <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn btn-info" %>
-              </p>
-            </div>
           </div>
         </div>
       <% end %>
