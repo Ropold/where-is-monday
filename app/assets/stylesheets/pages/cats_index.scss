@@ -1,10 +1,18 @@
-.image-container {
-  height: 100%;
-  overflow: hidden;
+.btn-main {
+  background-color: #F9943B;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: rgb(29, 27, 27);
+  font-size: 14px;
+  display: inline-block;
+  border-radius: 5px;
 }
 
-.image-container img {
-  height: 100%;
+.img-card-index {
+  border-radius: 10px;
   width: 100%;
-  object-fit: cover;
+  height: 210px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
