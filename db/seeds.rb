@@ -307,7 +307,7 @@ luna1 = Sighting.create!(
   status: "pending"
 )
 luna1.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/pending1_ktkske.jpg'),
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/pending1_zbuneo.jpg'),
   filename: 'luna1.jpg',
   content_type: 'image/jpeg'
 )
@@ -355,7 +355,7 @@ luna4 = Sighting.create!(
 )
 
 luna4.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted1_rorl0x.jpg'),
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted3_dv1rbu.jpg'),
   filename: 'luna4.jpg',
   content_type: 'image/jpeg'
 )
@@ -370,7 +370,7 @@ luna5 = Sighting.create!(
   status: "accepted"
 )
 luna5.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted2_fugaea.jpg'),
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted1_tz4hd9.jpg'),
   filename: 'luna5.jpg',
   content_type: 'image/jpeg'
 )
@@ -386,7 +386,7 @@ luna6 = Sighting.create!(
 )
 
 luna6.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/accepted3_be3a0c.jpg'),
+  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted2_yqbfet.jpg'),
   filename: 'luna6.jpg',
   content_type: 'image/jpeg'
 )
