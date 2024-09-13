@@ -28,24 +28,20 @@
           <!-- Cat Info inside each card -->
           <div class="card-cat-infos">
             <% if cat.photo.attached? %>
-              <%= cl_image_tag cat.photo.key, class: "card-img-top img-fluid" %>
+              <div class="img-card-index" style="background-image: url('<%= cl_image_path cat.photo.key %>');">
+              </div>
             <% end %>
             <div class="card-body">
               <h2 class="card-title py-2"><strong><%= cat.name %></strong></h2>
-              <p><strong><%= "#{cat.name} was lost at: " %></strong></p>
-              <p><%= cat.origin_address %></p>
+              <small><i class="fa-solid fa-house me-2"></i><%= cat.origin_address %></small>
               <% if cat.sightings.any? %>
-              <p><strong><%= "Last seen at:" %></strong></p>
-              <% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %>
-              <p><%= last_sighting.address if last_sighting %></p>
-              <p><%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></p>
-
+              <p><% last_sighting = cat.sightings.accepted.order(last_seen_at: :desc).first %></p>
+              <small><i class="fa-solid fa-eye"></i> Last seen at <%= last_sighting.address if last_sighting %> on <%= last_sighting.last_seen_at.strftime("%A, %d %B %Y at: %H:%M") if last_sighting %></small>
               <% else %>
                 <p><strong>No sightings available yet.</strong></p>
               <% end %>
-              <p><strong>Description:</strong> <%= cat.description %></p>
-              <p class="d-flex justify-content-end" style="position: absolute; bottom: 10px; right: 10px;">
-                  <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn-main my-1 ms-3 me-3" %>
+
+                  <%= link_to "Add sighting to this cat", cat_path(cat), class: "btn-main mt-4 d-block text-center" %>
             </div>
           </div>
         </div>
