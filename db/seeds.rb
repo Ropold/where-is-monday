@@ -27,7 +27,7 @@ cat1 = Cat.create(
   created_at: Time.now - rand(15..20).days
 )
 cat1.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726136294/luna-profile_n5hw0a.jpg'),
+  io: URI.open('https://cdn.pixabay.com/photo/2020/04/04/09/55/cat-5001570_960_720.jpg'),
   filename: 'photo.jpg',
   content_type: 'image/jpeg'
 )
@@ -307,7 +307,7 @@ luna1 = Sighting.create!(
   status: "pending"
 )
 luna1.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/pending1_zbuneo.jpg'),
+  io: URI.open('https://cdn.pixabay.com/photo/2013/01/05/14/51/cat-73975_960_720.jpg'),
   filename: 'luna1.jpg',
   content_type: 'image/jpeg'
 )
@@ -355,7 +355,7 @@ luna4 = Sighting.create!(
 )
 
 luna4.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted3_dv1rbu.jpg'),
+  io: URI.open('https://cdn.pixabay.com/photo/2017/06/05/18/43/cat-2374877_960_720.jpg'),
   filename: 'luna4.jpg',
   content_type: 'image/jpeg'
 )
@@ -370,7 +370,7 @@ luna5 = Sighting.create!(
   status: "accepted"
 )
 luna5.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted1_tz4hd9.jpg'),
+  io: URI.open('https://cdn.pixabay.com/photo/2020/08/17/18/38/cat-5496162_960_720.jpg'),
   filename: 'luna5.jpg',
   content_type: 'image/jpeg'
 )
@@ -386,7 +386,7 @@ luna6 = Sighting.create!(
 )
 
 luna6.photo.attach(
-  io: URI.open('https://res.cloudinary.com/dzjjlydk3/image/upload/v1726211162/accepted2_yqbfet.jpg'),
+  io: URI.open('https://cdn.pixabay.com/photo/2014/06/24/00/53/red-cat-375869_960_720.jpg'),
   filename: 'luna6.jpg',
   content_type: 'image/jpeg'
 )
@@ -513,6 +513,7 @@ cities.each do |city, addresses|
     )
   end
 end
+
 
 
 puts "Seeding completed!"
